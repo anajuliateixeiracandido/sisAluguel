@@ -26,20 +26,20 @@ Este projeto foi desenvolvido utilizando uma combinação de tecnologias moderna
 ### Diagrama de Caso de Uso
 
 <div>
- <img src="docs/diagramas/DiagramaDeCasoDeUsoV2.png" width="76%">
+ <img src="docs/DiagramaDeCasoDeUsoV2.png" width="76%">
 </div>
 
 ### Diagrama de Classe
 
 
 <div>
- <img src="docs/diagramas/Diagrama de Classe - LAB2.jpg" width="76%">
+ <img src="docs/Diagrama de Classe - LAB2.jpg" width="76%">
 </div>
 
 
 ### Diagrama de Pacotes
 <div>
- <img src="docs/diagramas/DiagramaDePacoteV2Lab2.png" width="76%">
+ <img src="docs/DiagramaDePacoteV2Lab2.png" width="76%">
 </div>
 
 ### Diagrama de Componente
