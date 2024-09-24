@@ -43,6 +43,9 @@ Este projeto foi desenvolvido utilizando uma combinação de tecnologias moderna
 </div>
 
 ### Diagrama de Componente
+<div>
+ <img src="docs/DiagramaDeComponenteLAB02.png" width="76%">
+</div>
 
 ### Diagrama de Implantação
 
