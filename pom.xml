@@ -44,6 +44,25 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Dependencias adicionadas posteriormente -->
+        <dependency>
+    <groupId>org.primefaces</groupId>
+    <artifactId>primefaces</artifactId>
+    <version>10.0.0</version> <!-- ou a versão mais recente -->
+</dependency>
+
+<dependency>
+    <groupId>org.glassfish</groupId>
+    <artifactId>jakarta.faces</artifactId>
+    <version>4.0.0</version> <!-- versão atual do Jakarta Faces -->
+</dependency>
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-tomcat</artifactId>
+    <scope>provided</scope>
+</dependency>
     </dependencies>
 
     <build>
