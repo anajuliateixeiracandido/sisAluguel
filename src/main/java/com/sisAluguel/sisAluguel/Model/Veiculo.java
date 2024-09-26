@@ -1,5 +1,6 @@
 package com.sisAluguel.sisAluguel.Model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +13,8 @@ import jakarta.persistence.Id;
 public class Veiculo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "idveiculo")
+    private Long idVeiculo;
 
     @NotNull
     private String matricula;
@@ -30,11 +32,11 @@ public class Veiculo {
     private String placa;
 
     public Long getId() {
-        return id;
+        return idVeiculo;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long idVeiculo) {
+        this.idVeiculo = idVeiculo;
     }
 
     public String getMatricula() {

@@ -17,15 +17,15 @@ public class VeiculoService {
         return veiculoRepository.findAll();
     }
 
-    public Veiculo findById(Long id) {
-        return veiculoRepository.findById(id).orElse(null);
+    public Veiculo findById(Long idVeiculo) {
+        return veiculoRepository.findById(idVeiculo).orElse(null);
     }
 
     public Veiculo save(Veiculo veiculo) {
         return veiculoRepository.save(veiculo);
     }
 
-    public void delete(Long id) {
-        veiculoRepository.deleteById(id);
+    public void delete(Long idVeiculo) {
+        veiculoRepository.deleteById(idVeiculo);
     }
 }

@@ -29,9 +29,9 @@ public class VeiculoController {
         return veiculoService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Veiculo> getById(@PathVariable Long id) {
-        Veiculo veiculo = veiculoService.findById(id);
+    @GetMapping("/{idVeiculo}")
+    public ResponseEntity<Veiculo> getById(@PathVariable Long idVeiculo) {
+        Veiculo veiculo = veiculoService.findById(idVeiculo);
         return veiculo != null ? ResponseEntity.ok(veiculo) : ResponseEntity.notFound().build();
     }
 
@@ -40,16 +40,16 @@ public class VeiculoController {
         return veiculoService.save(veiculo);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Veiculo> update(@PathVariable Long id, @RequestBody Veiculo veiculo) {
-        veiculo.setId(id);
+    @PutMapping("/{idVeiculo}")
+    public ResponseEntity<Veiculo> update(@PathVariable Long idVeiculo, @RequestBody Veiculo veiculo) {
+        veiculo.setId(idVeiculo);
         Veiculo updatedVeiculo = veiculoService.save(veiculo);
         return ResponseEntity.ok(updatedVeiculo);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        veiculoService.delete(id);
+    @DeleteMapping("/{idVeiculo}")
+    public ResponseEntity<Void> delete(@PathVariable Long idVeiculo) {
+        veiculoService.delete(idVeiculo);
         return ResponseEntity.noContent().build();
     }
     
