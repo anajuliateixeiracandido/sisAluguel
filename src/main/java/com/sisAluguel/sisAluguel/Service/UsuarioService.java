@@ -34,6 +34,30 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
+    public Usuario update(Long id, Usuario usuarioAtualizado) {
+        // Verificar se o usuário já existe
+        Usuario usuarioExistente = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        // Atualizar os campos do usuário existente com os dados fornecidos
+        usuarioExistente.setNome(usuarioAtualizado.getNome());
+        usuarioExistente.setCpf(usuarioAtualizado.getCpf());
+        usuarioExistente.setRg(usuarioAtualizado.getRg());
+        usuarioExistente.setProfissao(usuarioAtualizado.getProfissao());
+        usuarioExistente.setEntidadeEmpregadora(usuarioAtualizado.getEntidadeEmpregadora());
+        usuarioExistente.setRendimentoAuferido(usuarioAtualizado.getRendimentoAuferido());
+        usuarioExistente.setTipo(usuarioAtualizado.getTipo());
+
+        // Atualizar o endereço, se presente
+        if (usuarioAtualizado.getEndereco() != null) {
+            Endereco savedEndereco = enderecoRepository.save(usuarioAtualizado.getEndereco());
+            usuarioExistente.setEndereco(savedEndereco);
+        }
+
+        return usuarioRepository.save(usuarioExistente);
+    }
+
+   
     public void deleteById(Long id) {
         usuarioRepository.deleteById(id);
     }

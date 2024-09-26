@@ -41,7 +41,7 @@ public class AluguelController {
 
     @PutMapping("/{idAluguel}") 
     public ResponseEntity<Aluguel> update(@PathVariable Long idAluguel, @RequestBody Aluguel aluguel) {
-        aluguel.setId(idAluguel);
+        aluguel.setIdAluguel(idAluguel);
         Aluguel updatedAluguel = aluguelService.save(aluguel);
         return ResponseEntity.ok(updatedAluguel);
     }

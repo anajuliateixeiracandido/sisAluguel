@@ -39,11 +39,11 @@ public class Aluguel {
     @JoinColumn(name = "id_veiculo", nullable = false)
     private Veiculo veiculo;
 
-    public Long getId() {
+    public Long getIdAluguel() {
         return idAluguel;
     }
 
-    public void setId(Long idAluguel) {
+    public void setIdAluguel(Long idAluguel) {
         this.idAluguel = idAluguel;
     }
 
