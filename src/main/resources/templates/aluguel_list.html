@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Aluguéis</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <h1>Lista de Aluguéis</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Usuário</th>
+                <th>Veículo</th>
+                <th>Valor</th>
+                <th>Método de Pagamento</th>
+                <th>Número de Parcelas</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="aluguel : ${alugueis}">
+                <td th:text="${aluguel.idAluguel}"></td>
+                <td th:text="${aluguel.usuario.nome}"></td>
+                <td th:text="${aluguel.veiculo.modelo}"></td>
+                <td th:text="${aluguel.valor}"></td>
+                <td th:text="${aluguel.metodoPagamento}"></td>
+                <td th:text="${aluguel.numParcela}"></td>
+                <td>
+                    <a th:href="@{/aluguel/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Ver Detalhes</a> |
+                    <a th:href="@{/aluguel/editar/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Editar</a> |
+                    <a th:href="@{/aluguel/deletar/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+        
+    </table>
+    <a href="/aluguel/novo">Criar Novo Aluguel</a>
+</body>
+</html>

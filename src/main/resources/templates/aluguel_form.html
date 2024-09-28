@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Aluguel</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <h1 th:text="${aluguel.idAluguel == null ? 'Novo Aluguel' : 'Editar Aluguel'}"></h1>
+    <form th:action="@{/aluguel/novo}" th:object="${aluguel}" method="post">
+        <input type="hidden" th:field="*{idAluguel}" />
+        
+        <div>
+            <label>Usuário:</label>
+            <select th:field="*{usuario.id}">
+                <option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nome}"></option>
+            </select>
+        </div>
+        
+        <div>
+            <label>Veículo:</label>
+            <select th:field="*{veiculo.id}">
+                <option th:each="veiculo : ${veiculos}" th:value="${veiculo.id}" th:text="${veiculo.modelo}"></option>
+            </select>
+        </div>
+
+        <div>
+            <label>Valor:</label>
+            <input type="number" th:field="*{valor}" placeholder="Valor do Aluguel" />
+        </div>
+
+        <div>
+            <label>Método de Pagamento:</label>
+            <select th:field="*{metodoPagamento}">
+                <option th:value="DEBITO">Débito</option>
+                <option th:value="CREDITO">Crédito</option>
+                <option th:value="BOLETO">Boleto</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Número de Parcelas:</label>
+            <input type="number" th:field="*{numParcela}" placeholder="Número de Parcelas" />
+        </div>
+
+        <div>
+            <button type="submit">Salvar</button>
+        </div>
+    </form>
+    <a href="/aluguel">Voltar à lista</a>
+</body>
+</html>
