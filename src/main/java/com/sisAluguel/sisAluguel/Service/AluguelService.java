@@ -36,7 +36,7 @@ public class AluguelService {
         // Recupera os objetos Usuario e Veiculo com base nos IDs
         Usuario usuario = usuarioRepository.findById(aluguel.getUsuario().getId())
                              .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-        Veiculo veiculo = veiculoRepository.findById(aluguel.getVeiculo().getId())
+        Veiculo veiculo = veiculoRepository.findById(aluguel.getVeiculo().getIdVeiculo())
                              .orElseThrow(() -> new RuntimeException("Veículo não encontrado"));
 
         // Atribui os objetos completos ao aluguel
