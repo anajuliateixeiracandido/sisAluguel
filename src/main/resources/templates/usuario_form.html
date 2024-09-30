@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${usuario.id == null ? 'Novo Usuário' : 'Editar Usuário'}"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <h1 th:text="${usuario.id == null ? 'Novo Usuário' : 'Editar Usuário'}"></h1>
+    <form th:action="@{${usuario.id == null} ? '/usuario/novo' : '/usuario/editar'}" th:object="${usuario}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        
+        <div>
+            <label>Nome:</label>
+            <input type="text" th:field="*{nome}" placeholder="Nome" required />
+        </div>
+
+        <div>
+            <label>CPF:</label>
+            <input type="text" th:field="*{cpf}" placeholder="CPF" required />
+        </div>
+
+        <div>
+            <label>RG:</label>
+            <input type="text" th:field="*{rg}" placeholder="RG" />
+        </div>
+
+        <div>
+            <label>Profissão:</label>
+            <input type="text" th:field="*{profissao}" placeholder="Profissão" />
+        </div>
+
+        <div>
+            <label>Entidade Empregadora:</label>
+            <input type="text" th:field="*{entidadeEmpregadora}" placeholder="Entidade Empregadora" />
+        </div>
+
+        <div>
+            <label>Rendimento Auferido:</label>
+            <input type="number" th:field="*{rendimentoAuferido}" placeholder="Rendimento" />
+        </div>
+
+        <div>
+            <label>Senha:</label>
+            <input type="password" th:field="*{senha}" placeholder="Senha" required />
+        </div>
+
+        <div>
+            <label>Tipo:</label>
+            <select th:field="*{tipo}">
+                <option value="cliente" th:selected="${usuario.tipo == 'cliente'}">Cliente</option>
+                <option value="agente" th:selected="${usuario.tipo == 'agente'}">Agente</option>
+            </select>
+        </div>
+        <h2>Endereço</h2>
+    <div>
+        <label>Logradouro:</label>
+        <input type="text" th:field="*{endereco.logradouro}" placeholder="Logradouro" required />
+    </div>
+    <div>
+        <label>Bairro:</label>
+        <input type="text" th:field="*{endereco.bairro}" placeholder="Bairro" required />
+    </div>
+    <div>
+        <label>Cidade:</label>
+        <input type="text" th:field="*{endereco.cidade}" placeholder="Cidade" required />
+    </div>
+    <div>
+        <label>Estado:</label>
+        <input type="text" th:field="*{endereco.estado}" placeholder="Estado" required />
+    </div>
+    <div>
+        <label>CEP:</label>
+        <input type="text" th:field="*{endereco.cep}" placeholder="CEP" required />
+    </div>
+    <div>
+        <label>Número:</label>
+        <input type="number" th:field="*{endereco.numero}" placeholder="Número" required />
+    </div>
+
+        <div>
+            <button type="submit">Salvar</button>
+        </div>
+    </form>
+    <a href="/usuario/">Voltar à lista</a>
+</body>
+</html>

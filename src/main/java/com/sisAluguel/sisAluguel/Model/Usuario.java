@@ -1,9 +1,16 @@
 package com.sisAluguel.sisAluguel.Model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -12,6 +19,7 @@ import jakarta.validation.constraints.NotNull;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @NotNull
@@ -31,8 +39,20 @@ public class Usuario {
 
     @NotNull
     private Double rendimentoAuferido;
+    @NotNull
+    private String senha;  
 
     private String tipo;
+    
+   
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id", referencedColumnName = "idEndereco")
+    private Endereco endereco;
+
+    @OneToMany(mappedBy = "usuario")  // Associa os aluguéis ao usuário
+    private List<Aluguel> alugueis;
+
 
     // Getters e Setters
 
@@ -99,4 +119,63 @@ public class Usuario {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+   public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+     // Adicione o getter e setter para os aluguéis
+    public List<Aluguel> getAlugueis() {
+        return alugueis;
+    }
+
+    public void setAlugueis(List<Aluguel> alugueis) {
+        this.alugueis = alugueis;
+    }
+    
 }
+
+
+/*
+ * CREATE TABLE IF NOT EXISTS endereco(
+	id INT AUTO_INCREMENT PRIMARY KEY, 
+	logradouro VARCHAR(100) NOT NULL,
+    bairro VARCHAR(50) NOT NULL, 
+    cidade VARCHAR(50) NOT NULL, 
+    estado VARCHAR(50) NOT NULL, 
+    cep VARCHAR(8) NOT NULL, 
+    numero INT NOT NULL, 
+    complemento VARCHAR(20) 
+);
+ */
+
+ /*
+  * 
+
+  CREATE TABLE IF NOT EXISTS usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,  
+    nome VARCHAR(255) NOT NULL,          
+    cpf VARCHAR(14) NOT NULL,            
+    rg VARCHAR(20), 
+    tipo ENUM ('cliente', 'agente') NOT NULL,
+    profissao VARCHAR(100),              
+    entidade_empregadora VARCHAR(255),
+    rendimento_auferido DOUBLE, 
+    endereco_id INT,   -- Chave estrangeira para a tabela endereco
+    FOREIGN KEY (endereco_id) REFERENCES endereco(id) ON DELETE CASCADE
+);
+
+
+ */

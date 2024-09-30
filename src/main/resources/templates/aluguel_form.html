@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Aluguel</title>
+    <!-- Link do Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 th:text="${aluguel.idAluguel == null ? 'Novo Aluguel' : 'Editar Aluguel'}" class="mb-4"></h1>
+        
+        <form th:action="@{/aluguel/novo}" th:object="${aluguel}" method="post">
+            <input type="hidden" th:field="*{idAluguel}" />
+            
+            <div class="form-group">
+                <label for="usuario">Usuário:</label>
+                <select id="usuario" class="form-control" th:field="*{usuario.id}">
+                    <option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nome}"></option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="veiculo">Veículo:</label>
+                <select id="veiculo" class="form-control" th:field="*{veiculo.idVeiculo}">
+                    <option th:each="veiculo : ${veiculos}" th:value="${veiculo.idVeiculo}" th:text="${veiculo.modelo}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="valor">Valor:</label>
+                <input type="number" id="valor" class="form-control" th:field="*{valor}" placeholder="Valor do Aluguel" />
+            </div>
+
+            <div class="form-group">
+                <label for="metodoPagamento">Método de Pagamento:</label>
+                <select id="metodoPagamento" class="form-control" th:field="*{metodoPagamento}">
+                    <option th:value="DEBITO">Débito</option>
+                    <option th:value="CREDITO">Crédito</option>
+                    <option th:value="BOLETO">Boleto</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="numParcela">Número de Parcelas:</label>
+                <input type="number" id="numParcela" class="form-control" th:field="*{numParcela}" placeholder="Número de Parcelas" />
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="/aluguel/" class="btn btn-secondary ml-2">Voltar à lista</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Script do Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

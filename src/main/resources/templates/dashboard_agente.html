@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard do Agente</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <style>
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #05642A;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Estilos para a navbar */
+        .navbar {
+            background-color: #01401C;
+            width: 100%;
+        }
+
+        .nav-link {
+            color: white;
+        }
+
+        .nav-link:hover {
+            color: #C0FFC0;
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1); /* Para garantir que o ícone do menu seja visível */
+        }
+        .navbar-brand{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">RentDrive</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/veiculo/cadastro">Cadastrar Veiculo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/veiculo/lista/agente">Editar Veículos</a>
+              </li>
+              <li class="nav-item"></li>
+                <a class="nav-link" href="/aluguel/novo">Cadastrar Aluguéis</a>
+              </li>
+              <li class="nav-item"></li>
+                <a class="nav-link" href="/usuario/perfil">Perfil</a>
+              </li>
+              <li class="nav-item"></li>
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+          </div>
+        </div>
+      </nav>
+    <h1>Bem-vindo, <span th:text="${nomeUsuario}"></span>!</h1>
+    <div class="container agente" id="agente-container">
+        <h1 class="my-4">Lista de Aluguéis</h1>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Usuário</th>
+                    <th scope="col">Veículo</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Método de Pagamento</th>
+                    <th scope="col">Número de Parcelas</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="aluguel : ${alugueis}">
+                    <th scope="row" th:text="${aluguel.idAluguel}"></th>
+                    <td th:text="${aluguel.usuario.nome}"></td>
+                    <td th:text="${aluguel.veiculo.modelo}"></td>
+                    <td th:text="${aluguel.valor}"></td>
+                    <td th:text="${aluguel.metodoPagamento}"></td>
+                    <td th:text="${aluguel.numParcela}"></td>
+                    <td th:text="${aluguel.status}"></td> 
+                    <td>
+                        <a class="btn" th:href="@{/aluguel/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Ver Detalhes</a>
+                    </td>
+                    <td>
+                        <a class="btn" th:href="@{/aluguel/avaliar/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Avaliar</a>
+                    </td>
+                    <td>
+                        <a class="btn" th:href="@{/aluguel/deletar/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

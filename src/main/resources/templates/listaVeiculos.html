@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Usuários</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <h1>Lista de Usuários</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>matricula</th>
+                <th>ano</th>
+                <th>marca</th>
+                <th>Modelo</th>
+                <th>placa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="veiculo : ${veiculo}">
+                <td th:text="${veiculo.idVeiculo}"></td>
+                <td th:text="${veiculo.matricula}"></td>
+                <td th:text="${veiculo.ano}"></td>
+                <td th:text="${veiculo.marca}"></td>
+                <td th:text="${veiculo.modelo}"></td>
+                <td th:text="${veiculo.placa}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/veiculo/cadastro">Cadastrar novo veiculo</a>
+</body>
+</html>
