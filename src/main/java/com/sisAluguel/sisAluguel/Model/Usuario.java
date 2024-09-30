@@ -39,10 +39,12 @@ public class Usuario {
 
     @NotNull
     private Double rendimentoAuferido;
+    @NotNull
+    private String senha;  
 
     private String tipo;
     
-    private String senha;
+   
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", referencedColumnName = "idEndereco")
