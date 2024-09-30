@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil do Usuário</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <script>
+        function toggleEdit() {
+            var inputs = document.querySelectorAll('input:not([name="tipo"]), select:not([name="tipo"])'); 
+            var editButton = document.getElementById('editButton');
+            var saveButton = document.getElementById('saveButton');
+
+            inputs.forEach(function(input) {
+                input.disabled = !input.disabled;  
+            });
+
+            editButton.style.display = editButton.style.display === 'none' ? 'inline' : 'none';  
+            saveButton.style.display = saveButton.style.display === 'none' ? 'inline' : 'none';  
+        }
+    </script>
+</head>
+<body>
+    <h1>Perfil do Usuário</h1>
+    
+    <form th:action="@{/usuario/perfil}" th:object="${usuario}" method="post">  
+        <input type="hidden" th:field="*{id}" />
+
+        <div>
+            <label>Nome:</label>
+            <input type="text" th:field="*{nome}" placeholder="Nome" disabled />
+        </div>
+
+        <div>
+            <label>CPF:</label>
+            <input type="text" th:field="*{cpf}" placeholder="CPF" disabled />
+        </div>
+
+        <div>
+            <label>RG:</label>
+            <input type="text" th:field="*{rg}" placeholder="RG" disabled />
+        </div>
+
+        <div>
+            <label>Profissão:</label>
+            <input type="text" th:field="*{profissao}" placeholder="Profissão" disabled />
+        </div>
+
+        <div>
+            <label>Entidade Empregadora:</label>
+            <input type="text" th:field="*{entidadeEmpregadora}" placeholder="Entidade Empregadora" disabled />
+        </div>
+
+        <div>
+            <label>Rendimento Auferido:</label>
+            <input type="number" th:field="*{rendimentoAuferido}" placeholder="Rendimento" disabled />
+        </div>
+
+        <div>
+            <label>Senha:</label>
+            <input type="text" th:field="*{senha}" placeholder="Senha" disabled />
+        </div>
+
+        <div>
+            <label>Tipo:</label>
+            <select th:field="*{tipo}" disabled>
+                <option value="cliente" th:selected="${usuario.tipo == 'cliente'}">Cliente</option>
+                <option value="agente" th:selected="${usuario.tipo == 'agente'}">Agente</option>
+            </select>
+        </div>
+
+        <h2>Endereço</h2>
+        <div>
+            <label>Logradouro:</label>
+            <input type="text" th:field="*{endereco.logradouro}" placeholder="Logradouro" disabled />
+        </div>
+
+        <div>
+            <label>Bairro:</label>
+            <input type="text" th:field="*{endereco.bairro}" placeholder="Bairro" disabled />
+        </div>
+
+        <div>
+            <label>Cidade:</label>
+            <input type="text" th:field="*{endereco.cidade}" placeholder="Cidade" disabled />
+        </div>
+
+        <div>
+            <label>Estado:</label>
+            <input type="text" th:field="*{endereco.estado}" placeholder="Estado" disabled />
+        </div>
+
+        <div>
+            <label>CEP:</label>
+            <input type="text" th:field="*{endereco.cep}" placeholder="CEP" disabled />
+        </div>
+
+        <div>
+            <label>Número:</label>
+            <input type="number" th:field="*{endereco.numero}" placeholder="Número" disabled />
+        </div>
+
+        <div>
+            <label>Complemento:</label>
+            <input type="text" th:field="*{endereco.complemento}" placeholder="Complemento" disabled />
+        </div>
+
+        <div>
+            <button type="button" id="editButton" onclick="toggleEdit()">Editar</button>
+            <button type="submit" id="saveButton" style="display:none;">Salvar</button>
+        </div>
+    </form>
+
+    <div>
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>

@@ -39,6 +39,11 @@ public class Aluguel {
     @JoinColumn(name = "id_veiculo", nullable = false)
     private Veiculo veiculo;
 
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    @Column(name = "status")
+    private Status status;
+
     public Long getIdAluguel() {
         return idAluguel;
     }
@@ -87,12 +92,25 @@ public class Aluguel {
         this.veiculo = veiculo;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     enum MetodoPagamento {
         DEBITO,
         CREDITO,
         BOLETO;
     }
 
+    public enum Status {
+        PENDENTE,
+        APROVADA,
+        RECUSADA
+    }
 }
 
 /*
@@ -103,7 +121,8 @@ public class Aluguel {
  * numParcela INT,
  * idUsuario INT,
  * idVeiculo INT,
- * FOREIGN KEY (id) REFERENCES usuario(id) ON DELETE CASCADE,
+ * status ENUM ('aprovada', 'pendente', 'recusada') NOT NULL,
+ * FOREIGN KEY (idUsuario) REFERENCES usuario(id) ON DELETE CASCADE,
  * FOREIGN KEY (idVeiculo) REFERENCES veiculo(idVeiculo) ON DELETE CASCADE
  * );
  */

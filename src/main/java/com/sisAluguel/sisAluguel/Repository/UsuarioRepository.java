@@ -7,4 +7,7 @@ import com.sisAluguel.sisAluguel.Model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+    Usuario findByCpf(String cpf);
+
+    Usuario findByCpfAndSenha(String cpf, String senha);
 }

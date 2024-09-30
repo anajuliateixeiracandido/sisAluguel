@@ -3,11 +3,13 @@ package com.sisAluguel.sisAluguel.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sisAluguel.sisAluguel.Model.Aluguel;
 import com.sisAluguel.sisAluguel.Model.Endereco;
 import com.sisAluguel.sisAluguel.Model.Usuario;
 import com.sisAluguel.sisAluguel.Repository.EnderecoRepository;
 import com.sisAluguel.sisAluguel.Repository.UsuarioRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -61,4 +63,25 @@ public class UsuarioService {
     public void deleteById(Long id) {
         usuarioRepository.deleteById(id);
     }
+
+    // Adicione este método na classe UsuarioService
+public Usuario findByCpf(String cpf) {
+    return usuarioRepository.findByCpf(cpf);
+}
+
+public Usuario findbyCredentials(String cpf, String senha) {
+    return usuarioRepository.findByCpfAndSenha(cpf, senha);
+}
+
+
+public List<Aluguel> findAlugueisByCpf(String cpf) {
+    Usuario usuario = usuarioRepository.findByCpf(cpf);
+    if (usuario != null) {
+        return usuario.getAlugueis();
+    }
+    return new ArrayList<>(); // Retorna uma lista vazia se o usuário não tiver aluguéis ou não for encontrado
+}
+
+
+
 }
