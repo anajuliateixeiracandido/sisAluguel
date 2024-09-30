@@ -23,8 +23,8 @@
             
             <div class="form-group">
                 <label for="veiculo">Veículo:</label>
-                <select id="veiculo" class="form-control" th:field="*{veiculo.id}">
-                    <option th:each="veiculo : ${veiculos}" th:value="${veiculo.id}" th:text="${veiculo.modelo}"></option>
+                <select id="veiculo" class="form-control" th:field="*{veiculo.idVeiculo}">
+                    <option th:each="veiculo : ${veiculos}" th:value="${veiculo.idVeiculo}" th:text="${veiculo.modelo}"></option>
                 </select>
             </div>
 
