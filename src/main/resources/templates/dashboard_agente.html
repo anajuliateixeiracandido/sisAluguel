@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard do Agente</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <style>
+        .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+    </style>
+</head>
+<body>
+    <h1>Bem-vindo, Agente!</h1>
+    <div>
+        <h2>Aluguéis em Andamento</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Veículo</th>
+                    <th>Data de Início</th>
+                    <th>Data de Fim</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="aluguel : ${aluguels}">
+                    <td th:text="${aluguel.id}"></td>
+                    <td th:text="${aluguel.cliente.nome}"></td>
+                    <td th:text="${aluguel.veiculo.modelo}"></td>
+                    <td th:text="${aluguel.dataInicio}"></td>
+                    <td th:text="${aluguel.dataFim}"></td>
+                    <td th:text="${aluguel.status}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="/usuario/perfil" class="btn">Perfil</a>
+    </div>
+
+    <div>
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>

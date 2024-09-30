@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard do Cliente</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <h1>Bem-vindo, Cliente!</h1>
+    <div>
+        <h2>Seus Aluguéis</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Veículo</th>
+                    <th>Data de Início</th>
+                    <th>Data de Fim</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="aluguel : ${aluguels}">
+                    <td th:text="${aluguel.id}"></td>
+                    <td th:text="${aluguel.veiculo.modelo}"></td>
+                    <td th:text="${aluguel.dataInicio}"></td>
+                    <td th:text="${aluguel.dataFim}"></td>
+                    <td th:text="${aluguel.status}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/usuario/perfil" class="btn">Perfil</a>
+    </div>
+    <div>
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>

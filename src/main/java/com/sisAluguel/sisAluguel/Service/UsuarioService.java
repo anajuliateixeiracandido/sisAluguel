@@ -61,4 +61,8 @@ public class UsuarioService {
     public void deleteById(Long id) {
         usuarioRepository.deleteById(id);
     }
+
+    public Usuario findByCredentials(String cpf, String senha) {
+        return usuarioRepository.findByCpfAndSenha(cpf, senha);
+    }
 }

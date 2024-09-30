@@ -36,6 +36,8 @@ public class Usuario {
 
     @NotNull
     private Double rendimentoAuferido;
+    @NotNull
+    private String senha;  
 
     private String tipo;
 
@@ -116,6 +118,14 @@ public class Usuario {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     
