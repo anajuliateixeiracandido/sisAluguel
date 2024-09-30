@@ -4,15 +4,30 @@
     <meta charset="UTF-8">
     <title>Detalhes do Aluguel</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <!-- Link do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Detalhes do Aluguel</h1>
-    <p><strong>ID:</strong> <span th:text="${aluguel.idAluguel}"></span></p>
-    <p><strong>Usuário:</strong> <span th:text="${aluguel.usuario.nome}"></span></p>
-    <p><strong>Veículo:</strong> <span th:text="${aluguel.veiculo.modelo}"></span></p>
-    <p><strong>Valor:</strong> <span th:text="${aluguel.valor}"></span></p>
-    <p><strong>Método de Pagamento:</strong> <span th:text="${aluguel.metodoPagamento}"></span></p>
-    <p><strong>Número de Parcelas:</strong> <span th:text="${aluguel.numParcela}"></span></p>
-    <a href="/aluguel">Voltar à lista</a>
+    <div class="container mt-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h3 mb-0">Detalhes do Aluguel</h1>
+            </div>
+            <div class="card-body">
+                <p><strong>ID:</strong> <span th:text="${aluguel.idAluguel}"></span></p>
+                <p><strong>Usuário:</strong> <span th:text="${aluguel.usuario.nome}"></span></p>
+                <p><strong>Veículo:</strong> <span th:text="${aluguel.veiculo.modelo}"></span></p>
+                <p><strong>Valor:</strong> <span th:text="${aluguel.valor}"></span></p>
+                <p><strong>Método de Pagamento:</strong> <span th:text="${aluguel.metodoPagamento}"></span></p>
+                <p><strong>Número de Parcelas:</strong> <span th:text="${aluguel.numParcela}"></span></p>
+                <a href="/aluguel/" class="btn btn-secondary mt-3">Voltar à lista</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script do Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Veículos - Agente</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script>
+        function enableEditing(idVeiculo) {
+            var inputs = document.querySelectorAll(`#veiculo-${idVeiculo} input`);
+            var saveButton = document.getElementById(`salvar-btn-${idVeiculo}`);
+            inputs.forEach(function(input) {
+                input.disabled = false;
+            });
+            saveButton.style.display = 'inline';
+        }
+
+        function confirmarDelecao(veiculoId) {
+            var confirmacao = confirm("Tem certeza que deseja excluir este veículo?");
+            if (confirmacao) {
+                document.getElementById(`delete-form-${veiculoId}`).submit();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Lista de Veículos (Edição para Agentes)</h2>
+
+        <!-- Mensagem de sucesso ou erro -->
+        <div class="alert alert-success" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Matrícula</th>
+                    <th>Ano</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Placa</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="veiculo : ${veiculos}" th:id="'veiculo-' + ${veiculo.idVeiculo}">
+                    <form th:action="@{/veiculo/editar/{id}(id=${veiculo.idVeiculo})}" method="post">
+                        <td>
+                            <input type="text" th:value="${veiculo.matricula}" class="form-control" name="matricula" disabled />
+                        </td>
+                        <td>
+                            <input type="number" th:value="${veiculo.ano}" class="form-control" name="ano" disabled />
+                        </td>
+                        <td>
+                            <input type="text" th:value="${veiculo.marca}" class="form-control" name="marca" disabled />
+                        </td>
+                        <td>
+                            <input type="text" th:value="${veiculo.modelo}" class="form-control" name="modelo" disabled />
+                        </td>
+                        <td>
+                            <input type="text" th:value="${veiculo.placa}" class="form-control" name="placa" disabled />
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" th:onclick="'enableEditing(' + ${veiculo.idVeiculo} + ')'">Editar</button>
+                            <button type="submit" class="btn btn-success" th:id="'salvar-btn-' + ${veiculo.idVeiculo}" style="display:none;">Salvar</button>
+                        </td>
+                    </form>
+
+                    <!-- Botão de deletar -->
+                    <td>
+                        <form th:action="@{/veiculo/deletar/{id}(id=${veiculo.idVeiculo})}" method="post" th:id="'delete-form-' + ${veiculo.idVeiculo}">
+                            <input type="hidden" name="_method" value="delete" />
+                            <button type="button" class="btn btn-danger" th:onclick="'confirmarDelecao(' + ${veiculo.idVeiculo} + ')'">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

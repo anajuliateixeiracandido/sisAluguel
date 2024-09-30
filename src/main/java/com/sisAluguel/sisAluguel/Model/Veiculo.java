@@ -31,11 +31,11 @@ public class Veiculo {
     @NotNull
     private String placa;
 
-    public Long getId() {
+    public Long getIdVeiculo() {
         return idVeiculo;
     }
 
-    public void setId(Long idVeiculo) {
+    public void setIdVeiculo(Long idVeiculo) {
         this.idVeiculo = idVeiculo;
     }
 

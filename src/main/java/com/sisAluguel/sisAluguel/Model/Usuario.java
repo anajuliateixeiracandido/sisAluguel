@@ -1,5 +1,7 @@
 package com.sisAluguel.sisAluguel.Model;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -38,10 +41,15 @@ public class Usuario {
     private Double rendimentoAuferido;
 
     private String tipo;
+    
+    private String senha;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", referencedColumnName = "idEndereco")
     private Endereco endereco;
+
+    @OneToMany(mappedBy = "usuario")  // Associa os aluguéis ao usuário
+    private List<Aluguel> alugueis;
 
 
     // Getters e Setters
@@ -118,6 +126,22 @@ public class Usuario {
         this.endereco = endereco;
     }
 
+   public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+     // Adicione o getter e setter para os aluguéis
+    public List<Aluguel> getAlugueis() {
+        return alugueis;
+    }
+
+    public void setAlugueis(List<Aluguel> alugueis) {
+        this.alugueis = alugueis;
+    }
     
 }
 

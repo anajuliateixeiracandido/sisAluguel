@@ -4,38 +4,126 @@
     <meta charset="UTF-8">
     <title>Lista de Aluguéis</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Lista de Aluguéis</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Usuário</th>
-                <th>Veículo</th>
-                <th>Valor</th>
-                <th>Método de Pagamento</th>
-                <th>Número de Parcelas</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="aluguel : ${alugueis}">
-                <td th:text="${aluguel.idAluguel}"></td>
-                <td th:text="${aluguel.usuario.nome}"></td>
-                <td th:text="${aluguel.veiculo.modelo}"></td>
-                <td th:text="${aluguel.valor}"></td>
-                <td th:text="${aluguel.metodoPagamento}"></td>
-                <td th:text="${aluguel.numParcela}"></td>
-                <td>
-                    <a th:href="@{/aluguel/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Ver Detalhes</a> |
-                    <a th:href="@{/aluguel/editar/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Editar</a> |
-                    <a th:href="@{/aluguel/deletar/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Excluir</a>
-                </td>
-            </tr>
-        </tbody>
+    <div class="container mt-5">
+        <form action="/aluguel/buscarPorCpf" method="post">
+            <div class="form-group">
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" class="form-control">
+                    <option value="cliente">Cliente</option>
+                    <option value="agente">Agente</option>
+                </select>
+            </div>
+        </form>
+    </div>
+
+    <div class="container agente" id="agente-container">
+        <h1 class="my-4">Lista de Aluguéis</h1>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Usuário</th>
+                    <th scope="col">Veículo</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Método de Pagamento</th>
+                    <th scope="col">Número de Parcelas</th>
+                    <th scope="col">Status</th> <!-- Nova coluna Status -->
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="aluguel : ${alugueis}">
+                    <th scope="row" th:text="${aluguel.idAluguel}"></th>
+                    <td th:text="${aluguel.usuario.nome}"></td>
+                    <td th:text="${aluguel.veiculo.modelo}"></td>
+                    <td th:text="${aluguel.valor}"></td>
+                    <td th:text="${aluguel.metodoPagamento}"></td>
+                    <td th:text="${aluguel.numParcela}"></td>
+                    <td th:text="${aluguel.status}"></td> <!-- Exibe o Status -->
+                    <td>
+                        <a class="btn" th:href="@{/aluguel/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Ver Detalhes</a>
+                    </td>
+                    <td>
+                        <a class="btn" th:href="@{/aluguel/avaliar/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Avaliar</a>
+                    </td>
+                    <td>
+                        <a class="btn" th:href="@{/aluguel/deletar/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/aluguel/novo" class="btn">Criar Novo Aluguel</a>
+    </div>
+
+    <div class="container cliente" id="cliente-container" style="display: none;">
+        <h1 class="my-4">Lista de Aluguéis</h1>
+        <form id="cpfForm" action="/aluguel/buscarPorCpf" method="post">
+            <div class="form-group">
+                <label for="cpf">Qual seu CPF?</label>
+                <input type="text" id="cpf" name="cpf" class="form-control" placeholder="Digite seu CPF" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Buscar Aluguéis</button>
+        </form>
         
-    </table>
-    <a href="/aluguel/novo">Criar Novo Aluguel</a>
+        <table class="table table-striped table-bordered mt-3" id="aluguelTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Usuário</th>
+                    <th scope="col">Veículo</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Método de Pagamento</th>
+                    <th scope="col">Número de Parcelas</th>
+                    <th scope="col">Status</th> <!-- Nova coluna Status -->
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="aluguel : ${alugueis}">
+                    <th scope="row" th:text="${aluguel.idAluguel}"></th>
+                    <td th:text="${aluguel.usuario.nome}"></td>
+                    <td th:text="${aluguel.veiculo.modelo}"></td>
+                    <td th:text="${aluguel.valor}"></td>
+                    <td th:text="${aluguel.metodoPagamento}"></td>
+                    <td th:text="${aluguel.numParcela}"></td>
+                    <td th:text="${aluguel.status}"></td> <!-- Exibe o Status -->
+                    <td>
+                        <a class="btn" th:href="@{/aluguel/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Ver Detalhes</a>
+                    </td>
+                    <td>
+                        <a class="btn" th:href="@{/aluguel/editar/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Editar</a>
+                    </td>
+                    <td>
+                        <a class="btn" th:href="@{/aluguel/deletar/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tipo').change(function() {
+                var tipoSelecionado = $(this).val();
+                if (tipoSelecionado === 'cliente') {
+                    $('#cliente-container').show();
+                    $('#agente-container').hide();
+                } else {
+                    $('#cliente-container').hide();
+                    $('#agente-container').show();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

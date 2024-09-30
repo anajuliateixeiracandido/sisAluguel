@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <h1>Login</h1>
+    <div th:if="${message}" th:text="${message}"></div>
+    <form th:action="@{/login}" method="post">
+        <div>
+            <label>CPF:</label>
+            <input type="text" name="cpf" placeholder="CPF" required />
+        </div>
+        <div>
+            <label>Senha:</label>
+            <input type="password" name="senha" placeholder="Senha" required />
+        </div>
+        <div>
+            <button type="submit">Entrar</button>
+        </div>
+        <div th:if="${erro}" style="color: red;">
+            <p th:text="${erro}"></p>
+        </div>
+    </form>
+</body>
+</html>

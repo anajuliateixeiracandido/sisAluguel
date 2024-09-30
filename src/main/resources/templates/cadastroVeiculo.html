@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Veículo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <h1>Cadastro de Veículo</h1>
+
+    <form th:action="@{/veiculo/cadastro}" th:object="${veiculo}" method="post">
+        <div>
+            <label>Matrícula:</label>
+            <input type="text" th:field="*{matricula}" placeholder="Matrícula" required />
+        </div>
+
+        <div>
+            <label>Ano:</label>
+            <input type="number" th:field="*{ano}" placeholder="Ano" required />
+        </div>
+
+        <div>
+            <label>Marca:</label>
+            <input type="text" th:field="*{marca}" placeholder="Marca" required />
+        </div>
+
+        <div>
+            <label>Modelo:</label>
+            <input type="text" th:field="*{modelo}" placeholder="Modelo" required />
+        </div>
+
+        <div>
+            <label>Placa:</label>
+            <input type="text" th:field="*{placa}" placeholder="Placa" required />
+        </div>
+
+        <div>
+            <button type="submit">Cadastrar Veículo</button>
+        </div>
+    </form>
+
+    <div>
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>
