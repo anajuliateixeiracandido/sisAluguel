@@ -1,87 +1,175 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title th:text="${usuario.id == null ? 'Novo Usuário' : 'Editar Usuário'}"></title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <!-- Bootstrap para melhor estilização -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h1 {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
-    <h1 th:text="${usuario.id == null ? 'Novo Usuário' : 'Editar Usuário'}"></h1>
-    <form th:action="@{${usuario.id == null} ? '/usuario/novo' : '/usuario/editar'}" th:object="${usuario}" method="post">
-        <input type="hidden" th:field="*{id}" />
-        
-        <div>
-            <label>Nome:</label>
-            <input type="text" th:field="*{nome}" placeholder="Nome" required />
-        </div>
+    <div class="container form-container">
+        <h1 th:text="${usuario.id == null ? 'Novo Usuário' : 'Editar Usuário'}"></h1>
 
-        <div>
-            <label>CPF:</label>
-            <input type="text" th:field="*{cpf}" placeholder="CPF" required />
-        </div>
+        <form th:action="@{${usuario.id == null} ? '/usuario/novo' : '/usuario/editar'}" th:object="${usuario}" method="post">
+            <input type="hidden" th:field="*{id}" />
 
-        <div>
-            <label>RG:</label>
-            <input type="text" th:field="*{rg}" placeholder="RG" />
-        </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Nome:</label>
+                    <input type="text" th:field="*{nome}" class="form-control" placeholder="Nome" required />
+                </div>
 
-        <div>
-            <label>Profissão:</label>
-            <input type="text" th:field="*{profissao}" placeholder="Profissão" />
-        </div>
+                <div class="form-group col-md-6">
+                    <label>CPF:</label>
+                    <input type="text" id="cpf" th:field="*{cpf}" class="form-control" placeholder="CPF" required />
+                </div>
+            </div>
 
-        <div>
-            <label>Entidade Empregadora:</label>
-            <input type="text" th:field="*{entidadeEmpregadora}" placeholder="Entidade Empregadora" />
-        </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>RG:</label>
+                    <input type="text" th:field="*{rg}" class="form-control" placeholder="RG" />
+                </div>
 
-        <div>
-            <label>Rendimento Auferido:</label>
-            <input type="number" th:field="*{rendimentoAuferido}" placeholder="Rendimento" />
-        </div>
+                <div class="form-group col-md-6">
+                    <label>Profissão:</label>
+                    <input type="text" th:field="*{profissao}" class="form-control" placeholder="Profissão" />
+                </div>
+            </div>
 
-        <div>
-            <label>Senha:</label>
-            <input type="password" th:field="*{senha}" placeholder="Senha" required />
-        </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Entidade Empregadora:</label>
+                    <input type="text" th:field="*{entidadeEmpregadora}" class="form-control" placeholder="Entidade Empregadora" />
+                </div>
 
-        <div>
-            <label>Tipo:</label>
-            <select th:field="*{tipo}">
-                <option value="cliente" th:selected="${usuario.tipo == 'cliente'}">Cliente</option>
-                <option value="agente" th:selected="${usuario.tipo == 'agente'}">Agente</option>
-            </select>
-        </div>
-        <h2>Endereço</h2>
-    <div>
-        <label>Logradouro:</label>
-        <input type="text" th:field="*{endereco.logradouro}" placeholder="Logradouro" required />
+                <div class="form-group col-md-6">
+                    <label>Rendimento Auferido:</label>
+                    <input type="number" th:field="*{rendimentoAuferido}" class="form-control" placeholder="Rendimento" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Senha:</label>
+                    <input type="password" th:field="*{senha}" class="form-control" placeholder="Senha" required />
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label>Tipo:</label>
+                    <select th:field="*{tipo}" class="form-control">
+                        <option value="cliente" th:selected="${usuario.tipo == 'cliente'}">Cliente</option>
+                        <option value="agente" th:selected="${usuario.tipo == 'agente'}">Agente</option>
+                    </select>
+                </div>
+            </div>
+
+            <h2 class="mt-4">Endereço</h2>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Logradouro:</label>
+                    <input type="text" th:field="*{endereco.logradouro}" class="form-control" placeholder="Logradouro" required />
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label>Bairro:</label>
+                    <input type="text" th:field="*{endereco.bairro}" class="form-control" placeholder="Bairro" required />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Cidade:</label>
+                    <input type="text" th:field="*{endereco.cidade}" class="form-control" placeholder="Cidade" required />
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label>Estado:</label>
+                    <input type="text" th:field="*{endereco.estado}" class="form-control" placeholder="Estado" required />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>CEP:</label>
+                    <input type="text" id="cep" th:field="*{endereco.cep}" class="form-control" placeholder="CEP" required />
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label>Número:</label>
+                    <input type="number" th:field="*{endereco.numero}" class="form-control" placeholder="Número" required />
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <a href="/usuario/" class="btn btn-secondary">Voltar à lista</a>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
     </div>
-    <div>
-        <label>Bairro:</label>
-        <input type="text" th:field="*{endereco.bairro}" placeholder="Bairro" required />
-    </div>
-    <div>
-        <label>Cidade:</label>
-        <input type="text" th:field="*{endereco.cidade}" placeholder="Cidade" required />
-    </div>
-    <div>
-        <label>Estado:</label>
-        <input type="text" th:field="*{endereco.estado}" placeholder="Estado" required />
-    </div>
-    <div>
-        <label>CEP:</label>
-        <input type="text" th:field="*{endereco.cep}" placeholder="CEP" required />
-    </div>
-    <div>
-        <label>Número:</label>
-        <input type="number" th:field="*{endereco.numero}" placeholder="Número" required />
-    </div>
 
-        <div>
-            <button type="submit">Salvar</button>
-        </div>
-    </form>
-    <a href="/usuario/">Voltar à lista</a>
+    <!-- Importando o jQuery e jQuery Mask -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#cpf').mask('000.000.000-00', { placeholder: '___.___.___-__' });
+            $('#cep').mask('00000-000', { placeholder: '_____-___' });
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
