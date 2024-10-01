@@ -7,6 +7,34 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <style>
+        .navbar {
+            background-color: #01401C;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        .nav-link {
+            color: white;
+            font-size: 1.2em
+        }
+
+        .nav-link:hover {
+            color: #C0FFC0;
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        .navbar-brand {
+            color: white;
+            font-size: 1.5em
+        }
+
+        .navbar-brand:hover {
+            color: #C0FFC0;
+        }
+
         .card {
             margin-top: 20px;
             border-radius: 10px;
@@ -14,7 +42,7 @@
 
         .card-header {
             border-radius: 10px 10px 0 0;
-            background-color: #007bff;
+            background-color: #01401C;
             color: #fff;
         }
 
@@ -35,8 +63,14 @@
         }
 
         .btn-primary {
-            background-color: #007bff;
+            background-color: #01401c;
             border-color: #007bff;
+            margin-bottom: 1em;
+            margin-left: 1em;
+        }
+
+        .btn-primary:hover {
+            background-color: #45a049;
         }
 
         .btn-warning {
@@ -67,20 +101,47 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/dashboard_agente">RentDrive</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/veiculo/cadastro">Cadastrar Veiculo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/veiculo/lista/agente">Editar Veículos</a>
+                    </li>
+                    <li class="nav-item"></li>
+                    <a class="nav-link" href="/contrato/">Contratos</a>
+                    </li>
+                    <li class="nav-item"></li>
+                    <a class="nav-link" href="/usuario/perfil">Perfil</a>
+                    </li>
+                    <li class="nav-item"></li>
+                    <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+            </div>
+        </div>
+    </nav>
     <div class="container mt-5">
         <div class="card shadow-sm">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header text-white">
                 <h1 class="h3 mb-0 text-center">Lista de Contratos</h1>
             </div>
             <div class="card-body">
                 <table class="table table-striped table-bordered table-hover">
-                    <thead class="thead-dark">
+                    <thead>
                         <tr>
                             <th>ID Contrato</th>
                             <th>Usuário</th>
                             <th>Veículo</th>
                             <th>Valor</th>
-                            <th>Método de Pagamento</th>
+                            <th>Metd. Pagamento</th>
                             <th>Parcelas</th>
                             <th>Plano</th>
                             <th>Data de Início</th>
@@ -114,22 +175,18 @@
 
 
                             <td class="text-center">
-                                <form th:action="@{/contrato/deletar/{idContrato}(idContrato=${contrato.id})}" method="post" onsubmit="return confirm('Tem certeza que deseja excluir este contrato?');">
-                                    <input type="hidden" name="_method" value="delete"/>
-                                    <button type="submit" class="btn btn-danger btn-sm mx-1">Excluir</button>
+                                <form th:action="@{/contrato/deletar/{idContrato}(idContrato=${contrato.id})}" method="post"
+                                    onsubmit="return confirm('Tem certeza que deseja excluir este contrato?');">
+                                    <input type="hidden" name="_method" value="delete" />
+                                    <button type="submit" class="btn btn-danger btn-md mx-1">Excluir</button>
                                 </form>
                             </td>
-                            
-
-
-
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="text-center">
-                <a th:href="@{/contrato/novo/manual}" class="btn btn-primary mt-3">Criar Novo Contrato</a>
-
+            <div class="text-left">
+                <a th:href="@{/contrato/novo/manual}" class="btn btn-primary btn-lg mt-3">Criar Novo Contrato</a>
             </div>
         </div>
     </div>
