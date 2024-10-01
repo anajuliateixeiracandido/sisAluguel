@@ -27,7 +27,7 @@ public class UsuarioService {
     public Usuario findById(Long id) {
         return usuarioRepository.findById(id).orElse(null);
     }
-
+    
      public Usuario save(Usuario usuario) {
         if (usuario.getEndereco() != null) {
             Endereco savedEndereco = enderecoRepository.save(usuario.getEndereco());

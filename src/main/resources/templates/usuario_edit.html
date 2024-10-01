@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Perfil do Usuário</title>
@@ -43,19 +44,20 @@
     </style>
     <script>
         function toggleEdit() {
-            var inputs = document.querySelectorAll('input:not([name="tipo"]), select:not([name="tipo"])'); 
+            var inputs = document.querySelectorAll('input:not([name="tipo"]), select:not([name="tipo"])');
             var editButton = document.getElementById('editButton');
             var saveButton = document.getElementById('saveButton');
 
             inputs.forEach(function(input) {
-                input.disabled = !input.disabled;  
+                input.disabled = !input.disabled;
             });
 
-            editButton.style.display = editButton.style.display === 'none' ? 'inline' : 'none';  
-            saveButton.style.display = saveButton.style.display === 'none' ? 'inline' : 'none';  
+            editButton.style.display = editButton.style.display === 'none' ? 'inline' : 'none';
+            saveButton.style.display = saveButton.style.display === 'none' ? 'inline' : 'none';
         }
     </script>
 </head>
+
 <body>
     <div class="container">
         <h1>Perfil do Usuário</h1>
@@ -167,4 +169,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
+
 </html>

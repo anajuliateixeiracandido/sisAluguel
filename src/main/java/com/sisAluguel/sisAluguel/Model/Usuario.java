@@ -2,6 +2,8 @@ package com.sisAluguel.sisAluguel.Model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,6 +53,7 @@ public class Usuario {
     private Endereco endereco;
 
     @OneToMany(mappedBy = "usuario")  // Associa os aluguéis ao usuário
+    @JsonManagedReference
     private List<Aluguel> alugueis;
 
 

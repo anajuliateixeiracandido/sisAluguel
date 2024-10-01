@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Contrato</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            text-align: center;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        #detalhes-plano {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        .btn-container .btn {
+            min-width: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h3 mb-0">Criar Contrato</h1>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/contrato/novo}" th:object="${contrato}" method="POST">
+
+                    <input type="hidden" th:field="*{aluguel.idAluguel}" />
+                    <input type="hidden" th:field="*{usuario.id}" />
+
+                    <p><strong>Usuário:</strong> 
+                        <span th:text="${contrato?.aluguel?.usuario?.nome != null ? contrato.aluguel.usuario.nome : 'Usuário não disponível'}"></span>
+                    </p>
+                    <p><strong>Veículo:</strong> 
+                        <span th:text="${contrato?.aluguel?.veiculo?.modelo != null ? contrato.aluguel.veiculo.modelo : 'Veículo não disponível'}"></span>
+                    </p>
+                    
+                    <!-- Campo oculto para o valor do contrato, que será preenchido dinamicamente -->
+                    <input type="hidden" id="valor" name="valor" th:value="${contrato.valor}">
+
+                    <div class="form-group">
+                        <label for="metodoPagamento">Método de Pagamento:</label>
+                        <select id="metodoPagamento" name="metodoPagamento" class="form-control" onchange="validarParcelas()" required>
+                            <option value="">Selecione um método</option>
+                            <option value="cartao_credito">Cartão de Crédito</option>
+                            <option value="cartao_debito">Cartão de Débito</option>
+                            <option value="boleto">Boleto</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numParcela">Número de Parcelas:</label>
+                        <input type="number" id="numParcela" class="form-control" th:field="*{numParcela}" placeholder="Número de Parcelas" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipo">Escolha o Plano:</label>
+                        <select id="tipo" th:field="*{tipo}" name="tipo" class="form-control" onchange="mostrarDetalhesPlano()">
+                            <option value="">Selecione um plano</option>
+                            <option value="BRONZE">Plano Bronze</option>
+                            <option value="PRATA">Plano Prata</option>
+                            <option value="OURO">Plano Ouro</option>
+                        </select>
+                    </div>
+
+                    <div id="detalhes-plano" class="mt-4">
+                        <p>Selecione um plano para ver os detalhes.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data_inicio">Data de Início:</label>
+                        <input type="date" id="data_inicio" name="data_inicio" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data_fim">Data de Fim:</label>
+                        <input type="date" id="data_fim" name="data_fim" class="form-control" required>
+                    </div>
+
+                    <div class="btn-container">
+                        <a href="/aluguel/" class="btn btn-secondary">Voltar à lista</a>
+                        <button type="submit" class="btn btn-primary">Criar Contrato</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+            <script>
+                function mostrarDetalhesPlano() {
+                    const planoSelecionado = document.getElementById('tipo').value;
+                    let detalhes = '';
+                    let valorContrato = 0;
+
+                    switch (planoSelecionado) {
+                        case 'BRONZE':
+                            detalhes = `
+                                <h5>Plano Bronze</h5>
+                                <p><strong>Descrição:</strong> Ideal para quem precisa de um carro básico e econômico para o dia a dia.</p>
+                                <p><strong>Valor Mensal:</strong> R$ 799,00</p>
+                                <p><strong>Kilometragem:</strong> 1.000 km inclusos/mês</p>
+                                <p><strong>Cobertura de Seguro:</strong> Básica, com franquia de R$ 2.500,00</p>
+                                <p><strong>Manutenção:</strong> Inclusa (troca de óleo e revisão básica a cada 6 meses)</p>
+                                <p><strong>Assistência na Estrada:</strong> Disponível 24h, com limitações</p>
+                                <p><strong>Extras:</strong></p>
+                                <ul>
+                                    <li>1 condutor adicional gratuito</li>
+                                    <li>Não inclui GPS ou sistema de entretenimento</li>
+                                </ul>`;
+                            valorContrato = 799.00;
+                            break;
+                        case 'PRATA':
+                            detalhes = `
+                                <h5>Plano Prata</h5>
+                                <p><strong>Descrição:</strong> Perfeito para quem busca um carro mais confortável e com mais recursos.</p>
+                                <p><strong>Valor Mensal:</strong> R$ 1.299,00</p>
+                                <p><strong>Kilometragem:</strong> 2.000 km inclusos/mês</p>
+                                <p><strong>Cobertura de Seguro:</strong> Intermediária, com franquia de R$ 1.500,00</p>
+                                <p><strong>Manutenção:</strong> Inclusa (troca de óleo e revisão completa a cada 6 meses)</p>
+                                <p><strong>Assistência na Estrada:</strong> Disponível 24h, com reboque e carro reserva</p>
+                                <p><strong>Extras:</strong></p>
+                                <ul>
+                                    <li>2 condutores adicionais gratuitos</li>
+                                    <li>Sistema de GPS incluído</li>
+                                    <li>Opção de upgrade para carro com tecnologia híbrida</li>
+                                </ul>`;
+                            valorContrato = 1299.00;
+                            break;
+                        case 'OURO':
+                            detalhes = `
+                                <h5>Plano Ouro</h5>
+                                <p><strong>Descrição:</strong> Ideal para clientes que desejam um veículo premium com todas as comodidades.</p>
+                                <p><strong>Valor Mensal:</strong> R$ 2.199,00</p>
+                                <p><strong>Kilometragem:</strong> 3.500 km inclusos/mês</p>
+                                <p><strong>Cobertura de Seguro:</strong> Completa, com franquia de R$ 1.000,00</p>
+                                <p><strong>Manutenção:</strong> Inclusa (troca de óleo e revisão completa a cada 6 meses, com carro reserva)</p>
+                                <p><strong>Assistência na Estrada:</strong> Disponível 24h, com reboque, carro reserva e motorista</p>
+                                <p><strong>Extras:</strong></p>
+                                <ul>
+                                    <li>Até 3 condutores adicionais gratuitos</li>
+                                    <li>Sistema de entretenimento premium e GPS incluído</li>
+                                    <li>Limpeza do veículo semanalmente</li>
+                                    <li>Opção de troca de veículo mensalmente</li>
+                                </ul>`;
+                            valorContrato = 2199.00;
+                            break;
+                        default:
+                            detalhes = '<p>Selecione um plano para ver os detalhes.</p>';
+                            valorContrato = 0;
+                    }
+
+                    document.getElementById('detalhes-plano').innerHTML = detalhes;
+                    document.getElementById('valor').value = valorContrato;
+                }
+
+                function validarParcelas() {
+                const metodoPagamento = document.getElementById('metodoPagamento').value;
+                const numParcela = document.getElementById('numParcela');
+
+                if (metodoPagamento === 'cartao_debito' || metodoPagamento === 'boleto') {
+                    numParcela.value = 1;
+                    numParcela.setAttribute('disabled', 'disabled');
+                } else {
+                    numParcela.removeAttribute('disabled');
+                    numParcela.value = ''; // Limpa o valor quando o campo for habilitado
+                }
+            }
+            </script>
+
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </div>
+    </div>
+</body>
+
+</html>

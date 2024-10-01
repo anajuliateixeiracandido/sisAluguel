@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Contratos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        .card {
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        .card-header {
+            border-radius: 10px 10px 0 0;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .btn-sm {
+            font-size: 0.875rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        @media (max-width: 768px) {
+            .table {
+                font-size: 0.9rem;
+            }
+
+            .card-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .btn-sm {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h3 mb-0 text-center">Lista de Contratos</h1>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID Contrato</th>
+                            <th>Usuário</th>
+                            <th>Veículo</th>
+                            <th>Valor</th>
+                            <th>Método de Pagamento</th>
+                            <th>Parcelas</th>
+                            <th>Plano</th>
+                            <th>Data de Início</th>
+                            <th>Data de Fim</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop através da lista de contratos -->
+                        <tr th:each="contrato : ${contratos}">
+                            <td th:text="${contrato.id}"></td>
+                            <td th:text="${contrato.usuario.nome}"></td>
+                            <!-- <td th:text="${contrato.veiculo.modelo}"></td> -->
+                            <td
+                                th:text="${contrato.aluguel.veiculo.modelo != null ? contrato.aluguel.veiculo.modelo : 'Veículo não disponível'}">
+                            </td>
+
+                            <td th:text="${contrato.valor}"></td>
+                            <td th:text="${contrato.metodoPagamento}"></td>
+                            <td th:text="${contrato.numParcela}"></td>
+                            <td th:text="${contrato.tipo}"></td>
+                            <td th:text="${contrato.data_inicio}"></td>
+                            <td th:text="${contrato.data_fim}"></td>
+
+                            <!-- Botão Editar -->
+                            <td class="text-center">
+                                <a th:href="@{/contrato/{idContrato}(idContrato=${contrato.id})}"
+                                    class="btn btn-warning btn-sm mx-1">Ver Detalhes</a>
+                            </td>
+
+
+                            <td class="text-center">
+                                <form th:action="@{/contrato/deletar/{idContrato}(idContrato=${contrato.id})}" method="post" onsubmit="return confirm('Tem certeza que deseja excluir este contrato?');">
+                                    <input type="hidden" name="_method" value="delete"/>
+                                    <button type="submit" class="btn btn-danger btn-sm mx-1">Excluir</button>
+                                </form>
+                            </td>
+                            
+
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center">
+                <a th:href="@{/contrato/novo/manual}" class="btn btn-primary mt-3">Criar Novo Contrato</a>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
