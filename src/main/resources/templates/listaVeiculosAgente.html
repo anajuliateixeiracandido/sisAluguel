@@ -4,14 +4,102 @@
     <meta charset="UTF-8">
     <title>Lista de Veículos - Agente</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+         .navbar {
+            background-color: #01401C;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        .nav-link {
+            color: white;
+            font-size: 1.2em
+        }
+
+        .nav-link:hover {
+            color: #C0FFC0;
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1); /* Para garantir que o ícone do menu seja visível */
+        }
+
+        .navbar-brand {
+            color: white;
+            font-size: 1.5em
+        }
+        .navbar-brand:hover {
+            color: #C0FFC0;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        /* Estilo do cabeçalho da tabela */
+        th {
+            background-color: #01401C;
+            color: white;
+            text-align: center;
+        }
+
+        /* Estilo das linhas da tabela */
+        tbody tr:hover {
+            background-color: #f8f9fa; /* Altera a cor de fundo ao passar o mouse */
+        }
+
+        /* Estilo dos botões */
+        .btn-primary {
+            background-color: #01401C;
+            border-color: #01401C;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #01642A;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        /* Estilo dos inputs */
+        .form-control {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-control:focus {
+            border-color: #01401C;
+            box-shadow: 0 0 5px rgba(1, 64, 28, 0.5);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 1em; /* Espaçamento entre o título e a navbar */
+            font-size: 2.5em; /* Tamanho do título */
+        }
+    </style>
     <script>
-        function enableEditing(idVeiculo) {
+         function enableEditing(idVeiculo) {
             var inputs = document.querySelectorAll(`#veiculo-${idVeiculo} input`);
             var saveButton = document.getElementById(`salvar-btn-${idVeiculo}`);
+            var editButton = document.getElementById(`editar-btn-${idVeiculo}`);
             inputs.forEach(function(input) {
                 input.disabled = false;
             });
-            saveButton.style.display = 'inline';
+            editButton.style.display = 'none'; // Esconde o botão de editar
+            saveButton.style.display = 'inline'; // Mostra o botão de salvar
         }
 
         function confirmarDelecao(veiculoId) {
@@ -23,11 +111,37 @@
     </script>
 </head>
 <body>
-    <div class="container">
-        <h2>Lista de Veículos (Edição para Agentes)</h2>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/dashboard_agente">RentDrive</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/veiculo/cadastro">Cadastrar Veiculo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/veiculo/lista/agente">Editar Veículos</a>
+              </li>
+              <li class="nav-item"></li>
+                <a class="nav-link" href="/aluguel/novo">Cadastrar Aluguéis</a>
+              </li>
+              <li class="nav-item"></li>
+                <a class="nav-link" href="/usuario/perfil">Perfil</a>
+              </li>
+              <li class="nav-item"></li>
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+          </div>
+        </div>
+      </nav>
 
-        <!-- Mensagem de sucesso ou erro -->
-        <div class="alert alert-success" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+    <div class="container">
+        <h2>Editar Veículos</h2>
+
+        <div class="alert alert-success" th:if="${mensagem != null}" th:text="${mensagem}" style="display:none;"></div>
 
         <table class="table table-striped">
             <thead>
@@ -37,6 +151,7 @@
                     <th>Marca</th>
                     <th>Modelo</th>
                     <th>Placa</th>
+                    <th>Ações</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -59,7 +174,7 @@
                             <input type="text" th:value="${veiculo.placa}" class="form-control" name="placa" disabled />
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary" th:onclick="'enableEditing(' + ${veiculo.idVeiculo} + ')'">Editar</button>
+                            <button type="button" class="btn btn-primary" th:id="'editar-btn-' + ${veiculo.idVeiculo}" th:onclick="'enableEditing(' + ${veiculo.idVeiculo} + ')'">Editar</button>
                             <button type="submit" class="btn btn-success" th:id="'salvar-btn-' + ${veiculo.idVeiculo}" style="display:none;">Salvar</button>
                         </td>
                     </form>
@@ -75,5 +190,8 @@
             </tbody>
         </table>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

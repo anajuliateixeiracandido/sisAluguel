@@ -4,43 +4,149 @@
     <meta charset="UTF-8">
     <title>Cadastro de Veículo</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        /* Estilos para a navbar */
+        .navbar {
+            background-color: #01401C;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        .nav-link {
+            color: white;
+            font-size: 1.2em;
+        }
+
+        .nav-link:hover {
+            color: #C0FFC0;
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1); /* Para garantir que o ícone do menu seja visível */
+        }
+
+        .navbar-brand {
+            color: white;
+            font-size: 1.5em;
+        }
+
+        .navbar-brand:hover {
+            color: #C0FFC0;
+        }
+
+        /* Estilo do contêiner */
+        .container {
+            max-width: 600px;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 5px; /* Espaçamento entre o título e a navbar */
+            font-size: 2em; /* Tamanho do título */
+        }
+
+        /* Estilo do formulário */
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-control:focus {
+            border-color: #01401C;
+            box-shadow: 0 0 5px rgba(1, 64, 28, 0.5);
+        }
+
+        .btn-primary {
+            background-color: #01401C;
+            border-color: #01401C;
+            transition: background-color 0.3s;
+            width: 100%; /* Botão ocupa toda a largura do contêiner */
+        }
+
+        .btn-primary:hover {
+            background-color: #01642A;
+        }
+    </style>
 </head>
 <body>
-    <h1>Cadastro de Veículo</h1>
 
-    <form th:action="@{/veiculo/cadastro}" th:object="${veiculo}" method="post">
-        <div>
-            <label>Matrícula:</label>
-            <input type="text" th:field="*{matricula}" placeholder="Matrícula" required />
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/dashboard_agente">RentDrive</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/veiculo/cadastro">Cadastrar Veículo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/veiculo/lista/agente">Editar Veículos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/aluguel/novo">Cadastrar Aluguéis</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/usuario/perfil">Perfil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+            </ul>
+          </div>
         </div>
+    </nav>
 
-        <div>
-            <label>Ano:</label>
-            <input type="number" th:field="*{ano}" placeholder="Ano" required />
-        </div>
+    <div class="container">
+        <h1>Cadastro de Veículo</h1>
 
-        <div>
-            <label>Marca:</label>
-            <input type="text" th:field="*{marca}" placeholder="Marca" required />
-        </div>
+        <form th:action="@{/veiculo/cadastro}" th:object="${veiculo}" method="post">
+            <div class="form-group">
+                <label for="matricula">Matrícula:</label>
+                <input type="text" th:field="*{matricula}" class="form-control" id="matricula" placeholder="Matrícula" required />
+            </div>
 
-        <div>
-            <label>Modelo:</label>
-            <input type="text" th:field="*{modelo}" placeholder="Modelo" required />
-        </div>
+            <div class="form-group">
+                <label for="ano">Ano:</label>
+                <input type="number" th:field="*{ano}" class="form-control" id="ano" placeholder="Ano" required />
+            </div>
 
-        <div>
-            <label>Placa:</label>
-            <input type="text" th:field="*{placa}" placeholder="Placa" required />
-        </div>
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <input type="text" th:field="*{marca}" class="form-control" id="marca" placeholder="Marca" required />
+            </div>
 
-        <div>
-            <button type="submit">Cadastrar Veículo</button>
-        </div>
-    </form>
+            <div class="form-group">
+                <label for="modelo">Modelo:</label>
+                <input type="text" th:field="*{modelo}" class="form-control" id="modelo" placeholder="Modelo" required />
+            </div>
 
-    <div>
-        <a href="/logout">Logout</a>
+            <div class="form-group">
+                <label for="placa">Placa:</label>
+                <input type="text" th:field="*{placa}" class="form-control" id="placa" placeholder="Placa" required />
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Cadastrar Veículo</button>
+            </div>
+        </form>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

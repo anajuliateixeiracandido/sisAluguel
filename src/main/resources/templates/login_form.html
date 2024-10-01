@@ -4,25 +4,100 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f8f9fa; /* Fundo claro para a página */
+            font-family: Arial, sans-serif; /* Fonte da página */
+        }
+
+        .login-container {
+            display: flex; /* Permite centralizar o conteúdo */
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center; /* Centraliza verticalmente */
+            height: 100vh; /* Altura total da viewport */
+        }
+
+        .login-form {
+            background-color: white; /* Fundo do formulário */
+            padding: 30px; /* Espaçamento interno */
+            border-radius: 8px; /* Bordas arredondadas */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para o formulário */
+            width: 400px; /* Largura do formulário */
+        }
+
+        h1 {
+            text-align: center; /* Centraliza o título */
+            margin-bottom: 20px; /* Espaço abaixo do título */
+        }
+
+        .form-group {
+            margin-bottom: 15px; /* Espaço entre os campos */
+        }
+
+        label {
+            font-weight: bold; /* Destaca os rótulos */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%; /* Largura total do campo */
+            padding: 10px; /* Espaçamento interno do campo */
+            border: 1px solid #ccc; /* Borda do campo */
+            border-radius: 4px; /* Bordas arredondadas */
+            box-sizing: border-box; /* Inclui o padding e a borda na largura total */
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff; /* Cor da borda ao focar */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra ao focar */
+            outline: none; /* Remove o contorno padrão */
+        }
+
+        button {
+            background-color: #01401C; /* Cor de fundo do botão */
+            color: white; /* Cor do texto do botão */
+            padding: 10px 15px; /* Espaçamento interno do botão */
+            border: none; /* Remove borda padrão */
+            border-radius: 4px; /* Bordas arredondadas */
+            cursor: pointer; /* Cursor de mão ao passar sobre o botão */
+            width: 100%; /* Largura total do botão */
+        }
+
+        button:hover {
+            background-color: #05642A; /* Cor de fundo ao passar o mouse */
+        }
+
+        .error-message {
+            color: red; /* Cor da mensagem de erro */
+            text-align: center; /* Centraliza a mensagem de erro */
+        }
+    </style>
 </head>
 <body>
-    <h1>Login</h1>
-    <div th:if="${message}" th:text="${message}"></div>
-    <form th:action="@{/login}" method="post">
-        <div>
-            <label>CPF:</label>
-            <input type="text" name="cpf" placeholder="CPF" required />
-        </div>
-        <div>
-            <label>Senha:</label>
-            <input type="password" name="senha" placeholder="Senha" required />
-        </div>
-        <div>
-            <button type="submit">Entrar</button>
-        </div>
-        <div th:if="${erro}" style="color: red;">
-            <p th:text="${erro}"></p>
-        </div>
-    </form>
+    <div class="login-container">
+        <form class="login-form" th:action="@{/login}" method="post">
+            <h1>Login</h1>
+            <div th:if="${message}" th:text="${message}" class="text-center"></div>
+            <div class="form-group">
+                <label>CPF:</label>
+                <input type="text" name="cpf" placeholder="CPF" required />
+            </div>
+            <div class="form-group">
+                <label>Senha:</label>
+                <input type="password" name="senha" placeholder="Senha" required />
+            </div>
+            <div class="form-group">
+                <button type="submit">Entrar</button>
+            </div>
+            <div th:if="${erro}" class="error-message">
+                <p th:text="${erro}"></p>
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

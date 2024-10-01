@@ -6,7 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <style>
-        .btn {
+         .btn {
             display: inline-block;
             padding: 10px 15px;
             background-color: #05642A;
@@ -14,6 +14,7 @@
             text-align: center;
             text-decoration: none;
             border-radius: 5px;
+            cursor: pointer;
         }
 
         .btn:hover {
@@ -24,10 +25,12 @@
         .navbar {
             background-color: #01401C;
             width: 100%;
+            padding: 20px 0;
         }
 
         .nav-link {
             color: white;
+            font-size: 1.2em
         }
 
         .nav-link:hover {
@@ -37,15 +40,54 @@
         .navbar-toggler-icon {
             filter: invert(1); /* Para garantir que o ícone do menu seja visível */
         }
-        .navbar-brand{
+
+        .navbar-brand {
             color: white;
+            font-size: 1.5em
+        }
+        .navbar-brand:hover {
+            color: #C0FFC0;
+        }
+
+        /* Estilos para a tabela */
+        table {
+            margin: 50px auto; /* Centraliza a tabela horizontalmente */
+            width: 80%; /* Define uma largura apropriada */
+            font-family: 'Arial', sans-serif; /* Altera a fonte da tabela */
+        }
+
+        thead {
+            background-color: #01401C; /* Cor de fundo do cabeçalho */
+            color: white;
+        }
+
+        th {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2; /* Cor de fundo alternada para as linhas */
+        }
+
+        tbody tr:hover {
+            background-color: #e0f7de; /* Cor de fundo ao passar o mouse */
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px; /* Espaçamento entre o título e a navbar */
+            font-size: 2.5em; /* Tamanho do título */
+        }
+        
+        .table {
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); /* Sombra para realce */
         }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">RentDrive</a>
+          <a class="navbar-brand" href="/dashboard_agente">RentDrive</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -58,9 +100,6 @@
                 <a class="nav-link" href="/veiculo/lista/agente">Editar Veículos</a>
               </li>
               <li class="nav-item"></li>
-                <a class="nav-link" href="/aluguel/novo">Cadastrar Aluguéis</a>
-              </li>
-              <li class="nav-item"></li>
                 <a class="nav-link" href="/usuario/perfil">Perfil</a>
               </li>
               <li class="nav-item"></li>
@@ -69,18 +108,18 @@
           </div>
         </div>
       </nav>
-    <h1>Bem-vindo, <span th:text="${nomeUsuario}"></span>!</h1>
+   
     <div class="container agente" id="agente-container">
-        <h1 class="my-4">Lista de Aluguéis</h1>
+        <h1 class="my-4">Aluguéis em andamento</h1>
         <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
+            <thead >
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Usuário</th>
                     <th scope="col">Veículo</th>
                     <th scope="col">Valor</th>
-                    <th scope="col">Método de Pagamento</th>
-                    <th scope="col">Número de Parcelas</th>
+                    <th scope="col">Met. Pagamento</th>
+                    <th scope="col">Num. Parcelas</th>
                     <th scope="col">Status</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -97,7 +136,7 @@
                     <td th:text="${aluguel.numParcela}"></td>
                     <td th:text="${aluguel.status}"></td> 
                     <td>
-                        <a class="btn" th:href="@{/aluguel/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Ver Detalhes</a>
+                        <a class="btn" th:href="@{/aluguel/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Detalhes</a>
                     </td>
                     <td>
                         <a class="btn" th:href="@{/aluguel/avaliar/{idAluguel}(idAluguel=${aluguel.idAluguel})}">Avaliar</a>

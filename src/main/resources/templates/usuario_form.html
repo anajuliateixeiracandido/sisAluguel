@@ -4,84 +4,211 @@
     <meta charset="UTF-8">
     <title th:text="${usuario.id == null ? 'Novo Usuário' : 'Editar Usuário'}"></title>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <style>
+        body {
+            background-color: #f8f9fa; /* Fundo claro para a página */
+            font-family: Arial, sans-serif; /* Fonte da página */
+        }
+
+        .container {
+            display: flex; /* Permite criar um layout flexível */
+            justify-content: space-between; /* Espaçamento entre as colunas */
+            width: 80%; /* Largura do container */
+            margin: 50px auto; /* Centraliza o container */
+            border: 1px solid #ccc; /* Borda do container */
+            border-radius: 8px; /* Bordas arredondadas */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para o container */
+            background-color: white; /* Fundo do container */
+            padding: 20px; /* Espaçamento interno */
+        }
+
+        .form-container {
+            width: 48%; /* Largura do formulário */
+        }
+
+        .form-container h1, .form-container h2 {
+            margin-bottom: 20px; /* Espaço abaixo do título */
+            text-align: center; /* Centraliza o texto */
+        }
+
+        .form-container div {
+            margin-bottom: 15px; /* Espaço entre os campos */
+        }
+
+        .form-container label {
+            font-weight: bold; /* Destaca os rótulos */
+            display: block; /* Exibe os rótulos em bloco */
+            margin-bottom: 5px; /* Espaço abaixo do rótulo */
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="number"],
+        .form-container input[type="password"],
+        .form-container select {
+            width: 100%; /* Largura total do campo */
+            padding: 10px; /* Espaçamento interno do campo */
+            border: 1px solid #ccc; /* Borda do campo */
+            border-radius: 4px; /* Bordas arredondadas */
+            box-sizing: border-box; /* Inclui o padding e a borda na largura total */
+        }
+
+        .form-container .inline {
+            display: flex; /* Alinha os campos em linha */
+            justify-content: space-between; /* Espaçamento entre os campos */
+        }
+
+        .form-container .inline div {
+            flex: 1; /* Permite que os campos ocupem espaço igual */
+            margin-right: 10px; /* Espaço à direita do campo */
+        }
+
+        .form-container .inline div:last-child {
+            margin-right: 0; /* Remove margem do último campo */
+        }
+
+        .form-container button {
+            background-color: #01401C; /* Cor de fundo do botão */
+            color: white; /* Cor do texto do botão */
+            padding: 10px 15px; /* Espaçamento interno do botão */
+            border: none; /* Remove borda padrão */
+            border-radius: 4px; /* Bordas arredondadas */
+            cursor: pointer; /* Cursor de mão ao passar sobre o botão */
+            width: 100%; /* Largura total do botão */
+        }
+
+        .form-container button:hover {
+            background-color: #05642A; /* Cor de fundo ao passar o mouse */
+        }
+
+        .image-container {
+            width: 48%; /* Largura da imagem */
+            display: flex; /* Permite centralizar a imagem */
+            align-items: center; /* Centraliza verticalmente */
+            justify-content: center; /* Centraliza horizontalmente */
+        }
+
+        .image-container img {
+            max-width: 100%; /* Mantém a imagem dentro do container */
+            height: 80%; /* Mantém a proporção da imagem */
+            border-radius: 8px; /* Bordas arredondadas para a imagem */
+        }
+
+        a {
+            display: block; /* Exibe o link em bloco */
+            text-align: center; /* Centraliza o texto do link */
+            margin-top: 20px; /* Espaço acima do link */
+            text-decoration: none; /* Remove sublinhado do link */
+            color: #01401C; /* Cor do link */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Sublinha o link ao passar o mouse */
+        }
+    </style>
 </head>
 <body>
-    <h1 th:text="${usuario.id == null ? 'Novo Usuário' : 'Editar Usuário'}"></h1>
-    <form th:action="@{${usuario.id == null} ? '/usuario/novo' : '/usuario/editar'}" th:object="${usuario}" method="post">
-        <input type="hidden" th:field="*{id}" />
-        
-        <div>
-            <label>Nome:</label>
-            <input type="text" th:field="*{nome}" placeholder="Nome" required />
+    <div class="container">
+        <div class="form-container">
+            <h1 th:text="${usuario.id == null ? 'Novo Usuário' : 'Editar Usuário'}"></h1>
+            <form th:action="@{${usuario.id == null} ? '/usuario/novo' : '/usuario/editar'}" th:object="${usuario}" method="post">
+                <input type="hidden" th:field="*{id}" />
+
+                <!-- 1ª Linha -->
+                <div>
+                    <label>Nome:</label>
+                    <input type="text" th:field="*{nome}" placeholder="Nome" required />
+                </div>
+
+                <!-- 2ª Linha -->
+                <div class="inline">
+                    <div>
+                        <label>CPF:</label>
+                        <input type="text" th:field="*{cpf}" placeholder="CPF" required />
+                    </div>
+                    <div>
+                        <label>RG:</label>
+                        <input type="text" th:field="*{rg}" placeholder="RG" />
+                    </div>
+                </div>
+
+                <!-- 3ª Linha -->
+                <div class="inline">
+                    <div>
+                        <label>Profissão:</label>
+                        <input type="text" th:field="*{profissao}" placeholder="Profissão" />
+                    </div>
+                    <div>
+                        <label>Entid. Empregadora:</label>
+                        <input type="text" th:field="*{entidadeEmpregadora}" placeholder="Entidade Empregadora" />
+                    </div>
+                    <div>
+                        <label>Rendimento Auferido:</label>
+                        <input type="number" th:field="*{rendimentoAuferido}" placeholder="Rendimento" />
+                    </div>
+                </div>
+
+                <!-- 4ª Linha -->
+                <div>
+                    <label>Senha:</label>
+                    <input type="password" th:field="*{senha}" placeholder="Senha" required />
+                </div>
+
+                <!-- 5ª Linha -->
+                <div>
+                    <label>Tipo:</label>
+                    <select th:field="*{tipo}">
+                        <option value="cliente" th:selected="${usuario.tipo == 'cliente'}">Cliente</option>
+                        <option value="agente" th:selected="${usuario.tipo == 'agente'}">Agente</option>
+                    </select>
+                </div>
+
+                <!-- 6ª Linha -->
+                <div>
+                    <label>Logradouro:</label>
+                    <input type="text" th:field="*{endereco.logradouro}" placeholder="Logradouro" required />
+                </div>
+
+                <!-- 7ª Linha -->
+                <div class="inline">
+                    <div>
+                        <label>Bairro:</label>
+                        <input type="text" th:field="*{endereco.bairro}" placeholder="Bairro" required />
+                    </div>
+                    <div>
+                        <label>Cidade:</label>
+                        <input type="text" th:field="*{endereco.cidade}" placeholder="Cidade" required />
+                    </div>
+                    <div>
+                        <label>Estado:</label>
+                        <input type="text" th:field="*{endereco.estado}" placeholder="Estado" required />
+                    </div>
+                </div>
+
+                <!-- 8ª Linha -->
+                <div class="inline">
+                    <div>
+                        <label>CEP:</label>
+                        <input type="text" th:field="*{endereco.cep}" placeholder="CEP" required />
+                    </div>
+                    <div>
+                        <label>Número:</label>
+                        <input type="number" th:field="*{endereco.numero}" placeholder="Número" required />
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit">Salvar</button>
+                </div>
+            </form>
+            <a href="/usuario/">Voltar à lista</a>
         </div>
 
-        <div>
-            <label>CPF:</label>
-            <input type="text" th:field="*{cpf}" placeholder="CPF" required />
+        <div class="image-container">
+            <img src="https://cdn.esbrasil.com.br/wp-content/uploads/2023/03/Peugeot-508-2023.jpg" alt="Imagem ilustrativa" /> <!-- URL da imagem -->
         </div>
-
-        <div>
-            <label>RG:</label>
-            <input type="text" th:field="*{rg}" placeholder="RG" />
-        </div>
-
-        <div>
-            <label>Profissão:</label>
-            <input type="text" th:field="*{profissao}" placeholder="Profissão" />
-        </div>
-
-        <div>
-            <label>Entidade Empregadora:</label>
-            <input type="text" th:field="*{entidadeEmpregadora}" placeholder="Entidade Empregadora" />
-        </div>
-
-        <div>
-            <label>Rendimento Auferido:</label>
-            <input type="number" th:field="*{rendimentoAuferido}" placeholder="Rendimento" />
-        </div>
-
-        <div>
-            <label>Senha:</label>
-            <input type="password" th:field="*{senha}" placeholder="Senha" required />
-        </div>
-
-        <div>
-            <label>Tipo:</label>
-            <select th:field="*{tipo}">
-                <option value="cliente" th:selected="${usuario.tipo == 'cliente'}">Cliente</option>
-                <option value="agente" th:selected="${usuario.tipo == 'agente'}">Agente</option>
-            </select>
-        </div>
-        <h2>Endereço</h2>
-    <div>
-        <label>Logradouro:</label>
-        <input type="text" th:field="*{endereco.logradouro}" placeholder="Logradouro" required />
     </div>
-    <div>
-        <label>Bairro:</label>
-        <input type="text" th:field="*{endereco.bairro}" placeholder="Bairro" required />
-    </div>
-    <div>
-        <label>Cidade:</label>
-        <input type="text" th:field="*{endereco.cidade}" placeholder="Cidade" required />
-    </div>
-    <div>
-        <label>Estado:</label>
-        <input type="text" th:field="*{endereco.estado}" placeholder="Estado" required />
-    </div>
-    <div>
-        <label>CEP:</label>
-        <input type="text" th:field="*{endereco.cep}" placeholder="CEP" required />
-    </div>
-    <div>
-        <label>Número:</label>
-        <input type="number" th:field="*{endereco.numero}" placeholder="Número" required />
-    </div>
-
-        <div>
-            <button type="submit">Salvar</button>
-        </div>
-    </form>
-    <a href="/usuario/">Voltar à lista</a>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

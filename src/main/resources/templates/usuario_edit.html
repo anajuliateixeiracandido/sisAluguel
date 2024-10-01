@@ -3,7 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Perfil do Usuário</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Cor de fundo suave */
+        }
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+            color: #01401C; /* Cor do cabeçalho */
+        }
+        .form-container {
+            background-color: #ffffff; /* Fundo branco */
+            border-radius: 10px; /* Bordas arredondadas */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra do formulário */
+            padding: 20px;
+            margin: 20px 0; /* Margem superior e inferior */
+        }
+        .form-group {
+            margin-bottom: 1.5rem; /* Espaçamento entre os grupos do formulário */
+        }
+        .btn-primary {
+            background-color: #01401C;
+            border-color: #01401C;
+            transition: background-color 0.3s;
+            width: 10em;
+        }
+        .btn-primary:hover {
+            background-color: #01642A;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
     <script>
         function toggleEdit() {
             var inputs = document.querySelectorAll('input:not([name="tipo"]), select:not([name="tipo"])'); 
@@ -20,98 +57,114 @@
     </script>
 </head>
 <body>
-    <h1>Perfil do Usuário</h1>
-    
-    <form th:action="@{/usuario/perfil}" th:object="${usuario}" method="post">  
-        <input type="hidden" th:field="*{id}" />
+    <div class="container">
+        <h1>Perfil do Usuário</h1>
+        
+        <div class="form-container">
+            <form th:action="@{/usuario/perfil}" th:object="${usuario}" method="post">  
+                <input type="hidden" th:field="*{id}" />
 
-        <div>
-            <label>Nome:</label>
-            <input type="text" th:field="*{nome}" placeholder="Nome" disabled />
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Dados do Usuário</h2>
+                        <div class="form-group">
+                            <label>Nome:</label>
+                            <input type="text" th:field="*{nome}" class="form-control" placeholder="Nome" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>CPF:</label>
+                            <input type="text" th:field="*{cpf}" class="form-control" placeholder="CPF" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>RG:</label>
+                            <input type="text" th:field="*{rg}" class="form-control" placeholder="RG" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Profissão:</label>
+                            <input type="text" th:field="*{profissao}" class="form-control" placeholder="Profissão" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Entidade Empregadora:</label>
+                            <input type="text" th:field="*{entidadeEmpregadora}" class="form-control" placeholder="Entidade Empregadora" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Rendimento Auferido:</label>
+                            <input type="number" th:field="*{rendimentoAuferido}" class="form-control" placeholder="Rendimento" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Senha:</label>
+                            <input type="text" th:field="*{senha}" class="form-control" placeholder="Senha" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tipo:</label>
+                            <select th:field="*{tipo}" class="form-control" disabled>
+                                <option value="cliente" th:selected="${usuario.tipo == 'cliente'}">Cliente</option>
+                                <option value="agente" th:selected="${usuario.tipo == 'agente'}">Agente</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h2>Endereço</h2>
+                        <div class="form-group">
+                            <label>Logradouro:</label>
+                            <input type="text" th:field="*{endereco.logradouro}" class="form-control" placeholder="Logradouro" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Bairro:</label>
+                            <input type="text" th:field="*{endereco.bairro}" class="form-control" placeholder="Bairro" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cidade:</label>
+                            <input type="text" th:field="*{endereco.cidade}" class="form-control" placeholder="Cidade" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Estado:</label>
+                            <input type="text" th:field="*{endereco.estado}" class="form-control" placeholder="Estado" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label>CEP:</label>
+                            <input type="text" th:field="*{endereco.cep}" class="form-control" placeholder="CEP" disabled />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Número:</label>
+                                    <input type="number" th:field="*{endereco.numero}" class="form-control" placeholder="Número" disabled />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Complemento:</label>
+                                    <input type="text" th:field="*{endereco.complemento}" class="form-control" placeholder="Complemento" disabled />
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="button" id="editButton" class="btn btn-primary" onclick="toggleEdit()">Editar</button>
+                    <button type="submit" id="saveButton" class="btn btn-success" style="display:none;">Salvar</button>
+                </div>
+            </form>
         </div>
-
-        <div>
-            <label>CPF:</label>
-            <input type="text" th:field="*{cpf}" placeholder="CPF" disabled />
-        </div>
-
-        <div>
-            <label>RG:</label>
-            <input type="text" th:field="*{rg}" placeholder="RG" disabled />
-        </div>
-
-        <div>
-            <label>Profissão:</label>
-            <input type="text" th:field="*{profissao}" placeholder="Profissão" disabled />
-        </div>
-
-        <div>
-            <label>Entidade Empregadora:</label>
-            <input type="text" th:field="*{entidadeEmpregadora}" placeholder="Entidade Empregadora" disabled />
-        </div>
-
-        <div>
-            <label>Rendimento Auferido:</label>
-            <input type="number" th:field="*{rendimentoAuferido}" placeholder="Rendimento" disabled />
-        </div>
-
-        <div>
-            <label>Senha:</label>
-            <input type="text" th:field="*{senha}" placeholder="Senha" disabled />
-        </div>
-
-        <div>
-            <label>Tipo:</label>
-            <select th:field="*{tipo}" disabled>
-                <option value="cliente" th:selected="${usuario.tipo == 'cliente'}">Cliente</option>
-                <option value="agente" th:selected="${usuario.tipo == 'agente'}">Agente</option>
-            </select>
-        </div>
-
-        <h2>Endereço</h2>
-        <div>
-            <label>Logradouro:</label>
-            <input type="text" th:field="*{endereco.logradouro}" placeholder="Logradouro" disabled />
-        </div>
-
-        <div>
-            <label>Bairro:</label>
-            <input type="text" th:field="*{endereco.bairro}" placeholder="Bairro" disabled />
-        </div>
-
-        <div>
-            <label>Cidade:</label>
-            <input type="text" th:field="*{endereco.cidade}" placeholder="Cidade" disabled />
-        </div>
-
-        <div>
-            <label>Estado:</label>
-            <input type="text" th:field="*{endereco.estado}" placeholder="Estado" disabled />
-        </div>
-
-        <div>
-            <label>CEP:</label>
-            <input type="text" th:field="*{endereco.cep}" placeholder="CEP" disabled />
-        </div>
-
-        <div>
-            <label>Número:</label>
-            <input type="number" th:field="*{endereco.numero}" placeholder="Número" disabled />
-        </div>
-
-        <div>
-            <label>Complemento:</label>
-            <input type="text" th:field="*{endereco.complemento}" placeholder="Complemento" disabled />
-        </div>
-
-        <div>
-            <button type="button" id="editButton" onclick="toggleEdit()">Editar</button>
-            <button type="submit" id="saveButton" style="display:none;">Salvar</button>
-        </div>
-    </form>
-
-    <div>
-        <a href="/logout">Logout</a>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
