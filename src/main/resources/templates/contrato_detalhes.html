@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Contrato</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            text-align: center;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .form-control[readonly] {
+            background-color: #e9ecef;
+        }
+
+        .data-label {
+            font-weight: bold;
+        }
+
+        .data-value {
+            margin-bottom: 1rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h3 mb-0">Detalhes do Contrato</h1>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/contrato/editar/{idContrato}(idContrato=${contrato.id})}" th:object="${contrato}" method="put">
+                  
+                    <!-- <input type="hidden" name="_method" value="put" /> -->
+                    <input type="hidden" th:field="*{id}" />
+
+
+                    <div class="form-group">
+                        <label for="aluguel" class="data-label">Aluguel:</label>
+                        <input type="text" id="aluguel" class="form-control" th:value="${contrato.aluguel != null ? contrato.aluguel.idAluguel : 'Aluguel não disponível'}" readonly />
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <label for="usuario" class="data-label">Usuário:</label>
+                        <input type="text" id="usuario" class="form-control" th:field="*{aluguel.usuario.nome}" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="veiculo" class="data-label">Veículo:</label>
+                        <input type="text" id="veiculo" class="form-control" th:field="*{aluguel.veiculo.modelo}" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="valor" class="data-label">Valor do Contrato:</label>
+                        <input type="number" id="valor" class="form-control" th:field="*{valor}" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="metodoPagamento" class="data-label">Método de Pagamento:</label>
+                        <select id="metodoPagamento" class="form-control" th:field="*{metodoPagamento}" disabled>
+                            <option value="cartao_credito" th:selected="${contrato.metodoPagamento == 'cartao_credito'}">Cartão de Crédito</option>
+                            <option value="cartao_debito" th:selected="${contrato.metodoPagamento == 'cartao_debito'}">Cartão de Débito</option>
+                            <option value="boleto" th:selected="${contrato.metodoPagamento == 'boleto'}">Boleto</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numParcela" class="data-label">Número de Parcelas:</label>
+                        <input type="number" id="numParcela" class="form-control" th:field="*{numParcela}" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipo" class="data-label">Plano:</label>
+                        <select id="tipo" class="form-control" th:field="*{tipo}" disabled>
+                            <option value="BRONZE" th:selected="${contrato.tipo == 'BRONZE'}">Plano Bronze</option>
+                            <option value="PRATA" th:selected="${contrato.tipo == 'PRATA'}">Plano Prata</option>
+                            <option value="OURO" th:selected="${contrato.tipo == 'OURO'}">Plano Ouro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data_inicio" class="data-label">Data de Início:</label>
+                        <input type="date" id="data_inicio" class="form-control" th:field="*{data_inicio}" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data_fim" class="data-label">Data de Fim:</label>
+                        <input type="date" id="data_fim" class="form-control" th:field="*{data_fim}" readonly />
+                    </div>
+
+                    <div class="btn-container">
+                        <a href="/contrato/" class="btn btn-secondary">Voltar à lista</a>
+                        <button type="button" class="btn btn-warning" id="editarBtn" onclick="toggleEdit(true)">Editar</button>
+                        <button type="submit" class="btn btn-success hidden" id="salvarBtn">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleEdit(editMode) {
+            const formFields = document.querySelectorAll('input, select');
+            const editarBtn = document.getElementById('editarBtn');
+            const salvarBtn = document.getElementById('salvarBtn');
+
+            formFields.forEach(field => {
+                if (editMode) {
+                    field.removeAttribute('readonly');
+                    field.removeAttribute('disabled');
+                } else {
+                    field.setAttribute('readonly', 'readonly');
+                    field.setAttribute('disabled', 'disabled');
+                }
+            });
+
+            if (editMode) {
+                editarBtn.classList.add('hidden');
+                salvarBtn.classList.remove('hidden');
+            } else {
+                editarBtn.classList.remove('hidden');
+                salvarBtn.classList.add('hidden');
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

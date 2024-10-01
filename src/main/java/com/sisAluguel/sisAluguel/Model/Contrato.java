@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "contrato")
 public class Contrato {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_contrato")
@@ -33,9 +33,9 @@ public class Contrato {
     @NotNull
     private Double valor;
 
-       @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false)
-    private tipo tipo; 
+    private TipoPlano tipo;
 
     @NotNull
     private LocalDate data_inicio;
@@ -43,11 +43,26 @@ public class Contrato {
     @NotNull
     private LocalDate data_fim;
 
-    enum tipo {
-        CREDITO, 
-        ASSINATURA, 
-        QUILOMETRAGEM;
+    @NotNull
+    @Column(name = "num_parcela")
+    private Integer numParcela;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    @Column(name = "metodo_pagamento")
+    private MetodoPagamento metodoPagamento;
+
+
+    public enum MetodoPagamento {
+        cartao_credito,
+        cartao_debito,
+        boleto
     }
+
+    public enum TipoPlano {
+        BRONZE, PRATA, OURO;
+    }
+    
 
     public Long getId() {
         return idContrato;
@@ -97,30 +112,29 @@ public class Contrato {
         this.data_fim = data_fim;
     }
 
-    public tipo getTipo() {
+    public TipoPlano getTipo() {
         return tipo;
     }
 
-    public void setTipo(tipo tipo) {
+    public void setTipo(TipoPlano tipo) {
         this.tipo = tipo;
     }
 
+    public MetodoPagamento getMetodoPagamento() {
+        return metodoPagamento;
+    }
+
+    public void setMetodoPagamento(MetodoPagamento metodoPagamento) {
+        this.metodoPagamento = metodoPagamento;
+    }
+    public Integer getNumParcela() {
+        return numParcela;
+    }
+
+    public void setNumParcela(Integer numParcela) {
+        this.numParcela = numParcela;
+    }
 
     
+
 }
-
-
-/*
-
-CREATE TABLE IF NOT EXISTS contrato(
-	idContrato INT AUTO_INCREMENT PRIMARY KEY, 
-    id_usuario INT, 
-    id_aluguel INT, 
-	tipo ENUM('CREDITO', 'ASSINATURA', 'QUILOMETRAGEM') NOT NULL,  
-    data_inicio DATE NOT NULL, 
-    data_fim DATE, 
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_aluguel) REFERENCES aluguel(idAluguel) ON DELETE CASCADE
-);
-
- */
