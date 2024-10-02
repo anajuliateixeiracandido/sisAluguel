@@ -7,103 +7,104 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <style>
         body {
-            background-color: #f8f9fa; /* Fundo claro para a página */
-            font-family: Arial, sans-serif; /* Fonte da página */
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
         }
 
         .container {
-            display: flex; /* Permite criar um layout flexível */
-            justify-content: space-between; /* Espaçamento entre as colunas */
-            width: 80%; /* Largura do container */
-            margin: 50px auto; /* Centraliza o container */
-            border: 1px solid #ccc; /* Borda do container */
-            border-radius: 8px; /* Bordas arredondadas */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para o container */
-            background-color: white; /* Fundo do container */
-            padding: 20px; /* Espaçamento interno */
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            padding: 20px;
         }
 
         .form-container {
-            width: 48%; /* Largura do formulário */
+            width: 48%;
         }
 
-        .form-container h1, .form-container h2 {
-            margin-bottom: 20px; /* Espaço abaixo do título */
-            text-align: center; /* Centraliza o texto */
+        .form-container h1,
+        .form-container h2 {
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         .form-container div {
-            margin-bottom: 15px; /* Espaço entre os campos */
+            margin-bottom: 15px;
         }
 
         .form-container label {
-            font-weight: bold; /* Destaca os rótulos */
-            display: block; /* Exibe os rótulos em bloco */
-            margin-bottom: 5px; /* Espaço abaixo do rótulo */
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
         }
 
         .form-container input[type="text"],
         .form-container input[type="number"],
         .form-container input[type="password"],
         .form-container select {
-            width: 100%; /* Largura total do campo */
-            padding: 10px; /* Espaçamento interno do campo */
-            border: 1px solid #ccc; /* Borda do campo */
-            border-radius: 4px; /* Bordas arredondadas */
-            box-sizing: border-box; /* Inclui o padding e a borda na largura total */
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
 
         .form-container .inline {
-            display: flex; /* Alinha os campos em linha */
-            justify-content: space-between; /* Espaçamento entre os campos */
+            display: flex;
+            justify-content: space-between;
         }
 
         .form-container .inline div {
-            flex: 1; /* Permite que os campos ocupem espaço igual */
-            margin-right: 10px; /* Espaço à direita do campo */
+            flex: 1;
+            margin-right: 10px;
         }
 
         .form-container .inline div:last-child {
-            margin-right: 0; /* Remove margem do último campo */
+            margin-right: 0;
         }
 
         .form-container button {
-            background-color: #01401C; /* Cor de fundo do botão */
-            color: white; /* Cor do texto do botão */
-            padding: 10px 15px; /* Espaçamento interno do botão */
-            border: none; /* Remove borda padrão */
-            border-radius: 4px; /* Bordas arredondadas */
-            cursor: pointer; /* Cursor de mão ao passar sobre o botão */
-            width: 100%; /* Largura total do botão */
+            background-color: #01401C;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
         }
 
         .form-container button:hover {
-            background-color: #05642A; /* Cor de fundo ao passar o mouse */
+            background-color: #05642A;
         }
 
         .image-container {
-            width: 48%; /* Largura da imagem */
-            display: flex; /* Permite centralizar a imagem */
-            align-items: center; /* Centraliza verticalmente */
-            justify-content: center; /* Centraliza horizontalmente */
+            width: 48%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .image-container img {
-            max-width: 100%; /* Mantém a imagem dentro do container */
-            height: 80%; /* Mantém a proporção da imagem */
-            border-radius: 8px; /* Bordas arredondadas para a imagem */
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
         }
 
         a {
-            display: block; /* Exibe o link em bloco */
-            text-align: center; /* Centraliza o texto do link */
-            margin-top: 20px; /* Espaço acima do link */
-            text-decoration: none; /* Remove sublinhado do link */
-            color: #01401C; /* Cor do link */
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #01401C;
         }
 
         a:hover {
-            text-decoration: underline; /* Sublinha o link ao passar o mouse */
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -125,7 +126,7 @@
                 <div class="inline">
                     <div>
                         <label>CPF:</label>
-                        <input type="text" th:field="*{cpf}" placeholder="CPF" required />
+                        <input type="text" th:field="*{cpf}" placeholder="CPF" id="cpf" required />
                     </div>
                     <div>
                         <label>RG:</label>
@@ -165,9 +166,15 @@
                 </div>
 
                 <!-- 6ª Linha -->
-                <div>
-                    <label>Logradouro:</label>
-                    <input type="text" th:field="*{endereco.logradouro}" placeholder="Logradouro" required />
+                <div class="inline">
+                    <div>
+                        <label>CEP:</label>
+                        <input type="text" th:field="*{endereco.cep}" placeholder="CEP" id="cep" required />
+                    </div>
+                    <div>
+                        <label>Logradouro:</label>
+                        <input type="text" th:field="*{endereco.logradouro}" placeholder="Logradouro" required />
+                    </div>
                 </div>
 
                 <!-- 7ª Linha -->
@@ -189,12 +196,12 @@
                 <!-- 8ª Linha -->
                 <div class="inline">
                     <div>
-                        <label>CEP:</label>
-                        <input type="text" th:field="*{endereco.cep}" placeholder="CEP" required />
-                    </div>
-                    <div>
                         <label>Número:</label>
                         <input type="number" th:field="*{endereco.numero}" placeholder="Número" required />
+                    </div>
+                    <div>
+                        <label>Complemento:</label>
+                        <input type="text" th:field="*{endereco.complemento}" placeholder="Complemento" />
                     </div>
                 </div>
 
@@ -202,16 +209,25 @@
                     <button type="submit">Salvar</button>
                 </div>
             </form>
-            <a href="/usuario/">Voltar à lista</a>
+           
         </div>
 
         <div class="image-container">
-            <img src="https://cdn.esbrasil.com.br/wp-content/uploads/2023/03/Peugeot-508-2023.jpg" alt="Imagem ilustrativa" /> <!-- URL da imagem -->
+            <img src="https://images.unsplash.com/photo-1522255272218-7ac5249be344?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Imagem ilustrativa" />
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- jQuery e jQuery Mask Plugin -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    <!-- Scripts para aplicar as máscaras -->
+    <script>
+        $(document).ready(function () {
+            $('#cpf').mask('000.000.000-00');
+            $('#cep').mask('00000-000');
+        });
+    </script>
 </body>
 
 </html>

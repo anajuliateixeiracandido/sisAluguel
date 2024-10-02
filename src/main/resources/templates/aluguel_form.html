@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <title>Formulário de Aluguel</title>
     <!-- Link do Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
-    <style>
+   <!-- Adicionando o Bootstrap para estilização rápida -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <link rel="stylesheet" th:href="@{/css/style.css}" />
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+   <!-- Adicionando a biblioteca de ícones Font Awesome -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+ <style>
          .btn {
             display: inline-block;
             padding: 10px 15px;
@@ -17,7 +21,7 @@
             cursor: pointer;
         }
 
-        /* Estilos para a navbar */
+            /* Estilo da Navbar */
         .navbar {
             background-color: #01401C;
             width: 100%;
@@ -26,7 +30,7 @@
 
         .nav-link {
             color: white;
-            font-size: 1.2em
+            font-size: 1rem;
         }
 
         .nav-link:hover {
@@ -34,13 +38,14 @@
         }
 
         .navbar-toggler-icon {
-            filter: invert(1); /* Para garantir que o ícone do menu seja visível */
+            filter: invert(1);
         }
 
         .navbar-brand {
             color: white;
-            font-size: 1.5em
+            font-size: 1.2em;
         }
+
         .navbar-brand:hover {
             color: #C0FFC0;
         }
@@ -94,30 +99,33 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/dashboard_agente">RentDrive</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/veiculo/cadastro">Cadastrar Veiculo</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/veiculo/lista/agente">Editar Veículos</a>
-              </li>
-              <li class="nav-item"></li>
-                <a class="nav-link" href="/aluguel/novo">Cadastrar Aluguéis</a>
-              </li>
-              <li class="nav-item"></li>
-                <a class="nav-link" href="/usuario/perfil">Perfil</a>
-              </li>
-              <li class="nav-item"></li>
-                <a class="nav-link" href="/logout">Logout</a>
-              </li>
-          </div>
+            <a class="navbar-brand" href="/dashboard_cliente">RentDrive</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/veiculo/lista">Veículos</a>
+                    </li>
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/usuario/perfil">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/usuario/novo">Cadastrar</a>
+                    </li>
+                </ul>
+                <!-- Ícone de logout alinhado à direita -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </nav>
+    </nav>
 
     <div class="container mt-5">
         <h1 th:text="${aluguel.idAluguel == null ? 'Novo Aluguel' : 'Editar Aluguel'}" class="mb-4"></h1>
@@ -160,7 +168,7 @@
 
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Salvar</button>
-                <a href="/aluguel/" class="btn btn-secondary ml-2">Voltar à lista</a>
+                <a href="/dashboard_cliente" class="btn btn-secondary ml-2">Voltar à lista</a>
             </div>
         </form>
     </div>

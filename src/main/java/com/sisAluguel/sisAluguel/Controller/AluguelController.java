@@ -71,7 +71,7 @@ public ModelAndView create(@ModelAttribute Aluguel aluguel) {
     aluguelService.save(aluguel);
     
     // Redirecionando para a lista de alugueis
-    return new ModelAndView("redirect:/aluguel/");
+    return new ModelAndView("redirect:/dashboard_cliente");
 }
 
     @GetMapping("/editar/{idAluguel}")
@@ -95,13 +95,13 @@ public ModelAndView create(@ModelAttribute Aluguel aluguel) {
     @PostMapping("/editar")
     public ModelAndView update(@ModelAttribute Aluguel aluguel) {
         aluguelService.save(aluguel);
-        return new ModelAndView("redirect:/aluguel/");
+        return new ModelAndView("redirect:/dashboard_cliente");
     }
 
     @GetMapping("/deletar/{idAluguel}")
     public ModelAndView delete(@PathVariable Long idAluguel) {
         aluguelService.delete(idAluguel);
-        return new ModelAndView("redirect:/aluguel/");
+        return new ModelAndView("redirect:/dashboard_agente");
     }
 
     @PostMapping("/buscarPorCpf")

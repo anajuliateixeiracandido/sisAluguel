@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastro de Veículo</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+       <!-- Adicionando o Bootstrap para estilização rápida -->
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+       <link rel="stylesheet" th:href="@{/css/style.css}" />
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+       <!-- Adicionando a biblioteca de ícones Font Awesome -->
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   
 
     <style>
-        /* Estilos para a navbar */
-        .navbar {
+         /* Estilo da Navbar */
+         .navbar {
             background-color: #01401C;
             width: 100%;
             padding: 20px 0;
@@ -16,7 +21,7 @@
 
         .nav-link {
             color: white;
-            font-size: 1.2em;
+            font-size: 1rem;
         }
 
         .nav-link:hover {
@@ -24,12 +29,12 @@
         }
 
         .navbar-toggler-icon {
-            filter: invert(1); /* Para garantir que o ícone do menu seja visível */
+            filter: invert(1);
         }
 
         .navbar-brand {
             color: white;
-            font-size: 1.5em;
+            font-size: 1.2em;
         }
 
         .navbar-brand:hover {
@@ -84,32 +89,30 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/dashboard_agente">RentDrive</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/veiculo/cadastro">Cadastrar Veículo</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/veiculo/lista/agente">Editar Veículos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/aluguel/novo">Cadastrar Aluguéis</a>
-              </li>
-              <li class="nav-item"></li>
-                    <a class="nav-link" href="/contrato/">Contratos</a>
+            <a class="navbar-brand" href="/dashboard_agente">RentDrive</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/veiculo/lista/agente">Veículos</a>
                     </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/usuario/perfil">Perfil</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
-              </li>
-            </ul>
-          </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contrato/">Contratos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/usuario/perfil">Perfil</a>
+                    </li>
+                </ul>
+                <!-- Ícone de logout alinhado à direita -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
