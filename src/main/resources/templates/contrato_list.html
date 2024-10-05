@@ -153,8 +153,7 @@
                             <th scope="col">Plano</th>
                             <th scope="col">Data de Início</th>
                             <th scope="col">Data de Fim</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -170,23 +169,13 @@
                             <td th:text="${contrato.tipo}"></td>
                             <td th:text="${contrato.data_inicio}"></td>
                             <td th:text="${contrato.data_fim}"></td>
-                            <td class="text-center">
-                                <a th:href="@{/contrato/{idContrato}(idContrato=${contrato.id})}" class="btn">Ver Detalhes</a>
-                            </td>
-                            <td class="text-center">
-                                <form th:action="@{/contrato/deletar/{idContrato}(idContrato=${contrato.id})}" method="post"
-                                    onsubmit="return confirm('Tem certeza que deseja excluir este contrato?');">
-                                    <input type="hidden" name="_method" value="delete" />
-                                    <button type="submit" class="btn btn-danger btn-md mx-1">Excluir</button>
-                                </form>
+                          
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="d-flex justify-content-center">
-                <a th:href="@{/contrato/novo/manual}" class="btn btn-primary btn-lg mt-3">Criar Novo Contrato</a>
-            </div>
+            
         </div>
     </div>
 
