@@ -48,6 +48,8 @@ Este projeto foi desenvolvido utilizando uma combinação de tecnologias moderna
 </div>
 
 ### Diagrama de Implantação
+<div>
+ <img src="docs/Deployment Diagram sisAluguel0.png" width="76%">
+</div>
 
 ***
-
